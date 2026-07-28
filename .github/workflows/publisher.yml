@@ -24,15 +24,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install google-genai requests imageio-ffmpeg python-dotenv edge-tts google-api-python-client google-auth
+          pip install google-genai requests imageio-ffmpeg python-dotenv edge-tts google-api-python-client google-auth-oauthlib google-auth-httplib2
 
       - name: Run Video Generator
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
-          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
-          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          CLIENT_SECRET_JSON: ${{ secrets.CLIENT_SECRET_JSON }}
+          TOKEN_JSON: ${{ secrets.TOKEN_JSON }}
         run: python autocontent.py
 
       - name: Commit and push updated history and output files

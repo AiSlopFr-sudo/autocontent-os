@@ -10,14 +10,23 @@ import imageio_ffmpeg
 from pathlib import Path
 from dotenv import load_dotenv
 from google import genai
+from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
-from google.oauth2.credentials import Credentials
 
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
 history_file = BASE_DIR / "history.json"
+
+# Zorg dat credentials bestanden automatisch worden aangemaakt vanuit GitHub Secrets indien aanwezig
+if os.getenv("CLIENT_SECRET_JSON") and not Path("client_secret.json").exists():
+    with open("client_secret.json", "w", encoding="utf-8") as f:
+        f.write(os.getenv("CLIENT_SECRET_JSON"))
+
+if os.getenv("TOKEN_JSON") and not Path("token.json").exists():
+    with open("token.json", "w", encoding="utf-8") as f:
+        f.write(os.getenv("TOKEN_JSON"))
 
 history_data = {"topics": [], "scripts": []}
 if history_file.exists():
@@ -354,7 +363,7 @@ else:
     else:
         cmd.extend(["-map", "0:v:0", "-map", "1:a:0"])
 
-    vf_fallback = f"scale=1280:2272,zoompan=z='min(zoom+0.0015,1.3)':x='iw/2-(iw/zoom/2)':y='ih/2-(iw/zoom/2)':d=25*30:s=1080x1920,subtitles=filename='{clean_ass_path}'"
+    vf_fallback = f"scale=1280:2272,zoompan=z='min(zoom+0.0015,1.3)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=25*30:s=1080x1920,subtitles=filename='{clean_ass_path}'"
     cmd.extend(["-vf", vf_fallback])
 
 cmd.extend([
@@ -374,21 +383,16 @@ for cf in clip_files:
     except Exception:
         pass
 
-# 5. AUTOMATISCHE YOUTUBE UPLOAD
+# 5. AUTOMATISCHE YOUTUBE UPLOAD (VIA BESTAANDE TOKEN_JSON & CLIENT_SECRET_JSON)
 print("5/5 📤 Automatisch uploaden naar YouTube...")
-YT_CLIENT_ID = os.getenv("YT_CLIENT_ID", "")
-YT_CLIENT_SECRET = os.getenv("YT_CLIENT_SECRET", "")
-YT_REFRESH_TOKEN = os.getenv("YT_REFRESH_TOKEN", "")
-
-if YT_CLIENT_ID and YT_CLIENT_SECRET and YT_REFRESH_TOKEN:
+if Path("token.json").exists():
     try:
-        creds = Credentials(
-            token=None,
-            refresh_token=YT_REFRESH_TOKEN,
-            client_id=YT_CLIENT_ID,
-            client_secret=YT_CLIENT_SECRET,
-            token_uri="https://oauth2.googleapis.com/token"
-        )
+        creds = Credentials.from_authorized_user_file("token.json", ["https://www.googleapis.com/auth/youtube.upload"])
+        
+        if creds and creds.expired and creds.refresh_token:
+            from google.auth.transport.requests import Request
+            creds.refresh(Request())
+
         youtube = build("youtube", "v3", credentials=creds)
 
         body = {
@@ -417,6 +421,6 @@ if YT_CLIENT_ID and YT_CLIENT_SECRET and YT_REFRESH_TOKEN:
     except Exception as e:
         print(f"    ❌ Fout bij YouTube upload: {e}")
 else:
-    print("    ⚠️ Geen YouTube API-sleutels gevonden in omgeving; video is alleen lokaal/GitHub opgeslagen.")
+    print("    ⚠️ Geen token.json gevonden; video is alleen op GitHub opgeslagen.")
 
 print(f"\n🎉 VOLLEDIGE RUN SUCCESVOL AFGEROND!")
