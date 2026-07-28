@@ -108,8 +108,8 @@ if not music_file.exists():
     except Exception:
         pass
 
-# 1. SCRIPT, KEYWORDS & YOUTUBE METADATA GENEREREN
-print("1/5 🧠 Uniek script, Beeldzoektermen & YouTube Metadata genereren via Gemini AI...")
+# 1. SCRIPT, KEYWORDS & SPECIFIEKE YOUTUBE TITEL GENEREREN
+print("1/5 🧠 Uniek script, Beeldzoektermen & perfect passende YouTube Metadata genereren via Gemini AI...")
 script_text = ""
 search_keywords = [TOPIC, TOPIC, TOPIC]
 youtube_metadata = {
@@ -133,7 +133,7 @@ if GEMINI_API_KEY:
             f"{{\n"
             f'  "script": "spoken text here...",\n'
             f'  "keywords": ["search term 1", "search term 2", "search term 3"],\n'
-            f'  "title": "Catchy YouTube Short Title with Emojis",\n'
+            f'  "title": "Ultra catchy title matching the exact micro-fact with emojis",\n'
             f'  "description": "Engaging description text including #Shorts and relevant hashtags.",\n'
             f'  "tags": ["tag1", "tag2", "tag3", "tag4"]\n'
             f"}}\n\n"
@@ -141,7 +141,8 @@ if GEMINI_API_KEY:
             f"1. Script length: STRICTLY 35 to 45 words total.\n"
             f"2. Title must be under 60 characters and ultra catchy.\n"
             f"3. Keywords must be 1 to 3 simple English visual words suited for stock footage search.\n"
-            f"4. HOOK RULE: Start the script IMMEDIATELY with a shocking question, counter-intuitive fact, or direct confrontation. Never use words like 'Welcome', 'Today', 'In this video', or a slow introduction."
+            f"4. HOOK RULE: Start the script IMMEDIATELY with a shocking question, counter-intuitive fact, or direct confrontation. Never use words like 'Welcome', 'Today', 'In this video', or a slow introduction.\n"
+            f"5. TITLE RELEVANCE RULE: The title MUST directly describe the exact shocking micro-fact or core twist told in the script. Do NOT make it a broad or generic title about the main topic; it must specifically highlight the unique detail of this video."
         )
         response = client.models.generate_content(
             model='gemini-2.0-flash',
@@ -163,7 +164,7 @@ if GEMINI_API_KEY:
             "description": raw_desc + ai_disclaimer,
             "tags": data.get("tags", [TOPIC, "Shorts", "Facts"])
         }
-        print("    └─ Gemini AI script, unieke beeldsuggesties & metadata succesvol gegenereerd!")
+        print("    └─ Gemini AI script, unieke beeldsuggesties & scherpe metadata succesvol gegenereerd!")
     except Exception as e:
         print(f"    ⚠️ Fout bij Gemini AI API ({e}), terugvallen op backup metadata...")
 
@@ -289,7 +290,6 @@ if PEXELS_API_KEY:
             url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=20"
             res = requests.get(url, headers=headers).json()
             if "videos" in res and len(res["videos"]) > 0:
-                # Filter out clips already used in this video
                 available_videos = [v for v in res["videos"][:20] if v["id"] not in seen_video_ids]
                 if not available_videos:
                     available_videos = res["videos"][:20]
