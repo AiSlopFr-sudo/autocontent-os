@@ -24,12 +24,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install google-genai requests imageio-ffmpeg python-dotenv edge-tts
+          pip install google-genai requests imageio-ffmpeg python-dotenv edge-tts google-api-python-client google-auth
 
       - name: Run Video Generator
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
         run: python autocontent.py
 
       - name: Commit and push updated history and output files
@@ -37,5 +40,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.io"
           git add history.json video_*.mp4 video_*.json 2>/dev/null || true
-          git commit -m "Auto: Generated 1 unique video and updated history [skip ci]" || echo "No changes to commit"
+          git commit -m "Auto: Generated 1 unique video, uploaded to YouTube and updated history [skip ci]" || echo "No changes to commit"
           git push

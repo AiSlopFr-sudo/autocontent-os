@@ -10,13 +10,15 @@ import imageio_ffmpeg
 from pathlib import Path
 from dotenv import load_dotenv
 from google import genai
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+from google.oauth2.credentials import Credentials
 
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
 history_file = BASE_DIR / "history.json"
 
-# Laad eerdere geschiedenis om duplicaten te voorkomen
 history_data = {"topics": [], "scripts": []}
 if history_file.exists():
     try:
@@ -43,7 +45,6 @@ MASTER_TOPICS = [
     "Bizarre Planet Facts in our Solar System"
 ]
 
-# Filter onderwerpen die al zijn gebruikt
 available_topics = [t for t in MASTER_TOPICS if t not in history_data.get("topics", [])]
 if not available_topics:
     available_topics = MASTER_TOPICS
@@ -80,7 +81,7 @@ VOICE_MAP = {
 topic_key = next((k for k in VOICE_MAP if k.lower() in TOPIC.lower()), None)
 CHOSEN_VOICE = VOICE_MAP[topic_key] if topic_key else random.choice(["en-US-AvaMultilingualNeural", "en-US-AndrewMultilingualNeural", "en-US-BrianNeural", "en-GB-RyanNeural"])
 
-print(f"🚀 AutoContent OS: Single Video & Metadata Generator")
+print(f"🚀 AutoContent OS: Single Video & YouTube Publisher")
 print(f"    ├─ Gekozen Onderwerp: '{TOPIC}'")
 print(f"    ├─ Stem: '{CHOSEN_VOICE}'")
 print(f"    └─ Output: '{output_file.name}'\n")
@@ -106,7 +107,7 @@ if not music_file.exists():
         pass
 
 # 1. SCRIPT, KEYWORDS & YOUTUBE METADATA GENEREREN
-print("1/4 🧠 Uniek script, Beeldzoektermen & YouTube Metadata genereren via Gemini AI...")
+print("1/5 🧠 Uniek script, Beeldzoektermen & YouTube Metadata genereren via Gemini AI...")
 script_text = ""
 search_keywords = [TOPIC, TOPIC, TOPIC]
 youtube_metadata = {
@@ -175,18 +176,14 @@ if not script_text:
 
 history_data["scripts"].append(script_text)
 
-# Sla het bijgewerkte geheugen direct op
 with open(history_file, "w", encoding="utf-8") as f:
     json.dump(history_data, f, indent=2)
 
 with open(metadata_file, "w", encoding="utf-8") as f:
     json.dump(youtube_metadata, f, indent=2)
 
-print(f"    ├─ Titel: \"{youtube_metadata['title']}\"")
-print(f"    └─ Beeldzoektermen: {search_keywords}\n")
-
 # 2. VOICE-OVER & ONDERTITELS GENEREREN
-print("2/4 🎙️ Voice-over & ondertiteling genereren...")
+print("2/5 🎙️ Voice-over & ondertiteling genereren...")
 try:
     cmd_tts = [
         "edge-tts",
@@ -280,7 +277,7 @@ except Exception as e:
 
 # 3. WILLEKEURIGE B-ROLL OPHALEN VAN PEXELS
 clip_files = []
-print(f"3/4 🎥 Willekeurige videoclips ophalen voor zoektermen...")
+print(f"3/5 🎥 Willekeurige videoclips ophalen voor zoektermen...")
 headers = {"Authorization": PEXELS_API_KEY} if PEXELS_API_KEY else {}
 
 if PEXELS_API_KEY:
@@ -298,11 +295,8 @@ if PEXELS_API_KEY:
                 with open(clip_path, "wb") as f:
                     f.write(vid_data.content)
                 clip_files.append(clip_path)
-                print(f"    ├─ Clip {idx+1}: Willekeurig gedownload voor '{kw}'")
         except Exception as e:
             print(f"    ⚠️ Kon geen Pexels video ophalen voor '{kw}' ({e})")
-
-print("")
 
 if not clip_files:
     img_url = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1080&auto=format&fit=crop"
@@ -311,7 +305,7 @@ if not clip_files:
         f.write(img_res.content)
 
 # 4. EINDMONTAGE
-print("4/4 🎬 Vloeiende eindmontage starten...")
+print("4/5 🎬 Vloeiende eindmontage starten...")
 clean_ass_path = str(ass_file).replace(":", "\\:")
 use_music = music_file.exists() and music_file.stat().st_size > 50000
 
@@ -360,7 +354,7 @@ else:
     else:
         cmd.extend(["-map", "0:v:0", "-map", "1:a:0"])
 
-    vf_fallback = f"scale=1280:2272,zoompan=z='min(zoom+0.0015,1.3)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=25*30:s=1080x1920,subtitles=filename='{clean_ass_path}'"
+    vf_fallback = f"scale=1280:2272,zoompan=z='min(zoom+0.0015,1.3)':x='iw/2-(iw/zoom/2)':y='ih/2-(iw/zoom/2)':d=25*30:s=1080x1920,subtitles=filename='{clean_ass_path}'"
     cmd.extend(["-vf", vf_fallback])
 
 cmd.extend([
@@ -380,6 +374,49 @@ for cf in clip_files:
     except Exception:
         pass
 
-print(f"\n🎉 VIDEO EN METADATA SUCCESVOL GEGENEREERD!")
-print(f"    ├─ Video: '{output_file.name}'")
-print(f"    └─ Metadata: '{metadata_file.name}'")
+# 5. AUTOMATISCHE YOUTUBE UPLOAD
+print("5/5 📤 Automatisch uploaden naar YouTube...")
+YT_CLIENT_ID = os.getenv("YT_CLIENT_ID", "")
+YT_CLIENT_SECRET = os.getenv("YT_CLIENT_SECRET", "")
+YT_REFRESH_TOKEN = os.getenv("YT_REFRESH_TOKEN", "")
+
+if YT_CLIENT_ID and YT_CLIENT_SECRET and YT_REFRESH_TOKEN:
+    try:
+        creds = Credentials(
+            token=None,
+            refresh_token=YT_REFRESH_TOKEN,
+            client_id=YT_CLIENT_ID,
+            client_secret=YT_CLIENT_SECRET,
+            token_uri="https://oauth2.googleapis.com/token"
+        )
+        youtube = build("youtube", "v3", credentials=creds)
+
+        body = {
+            "snippet": {
+                "title": youtube_metadata["title"],
+                "description": youtube_metadata["description"],
+                "tags": youtube_metadata["tags"],
+                "categoryId": "27"
+            },
+            "status": {
+                "privacyStatus": "public",
+                "selfDeclaredMadeForKids": False
+            }
+        }
+
+        media = MediaFileUpload(str(output_file), chunksize=-1, resumable=True, mimetype="video/mp4")
+        request = youtube.videos().insert(part="snippet,status", body=body, media_body=media)
+        
+        response = None
+        while response is None:
+            status, response = request.next_chunk()
+            if status:
+                print(f"    ├─ Upload voortgang: {int(status.progress() * 100)}%")
+
+        print(f"    └─ 🎉 Succesvol gepubliceerd op YouTube! Video ID: {response.get('id')}")
+    except Exception as e:
+        print(f"    ❌ Fout bij YouTube upload: {e}")
+else:
+    print("    ⚠️ Geen YouTube API-sleutels gevonden in omgeving; video is alleen lokaal/GitHub opgeslagen.")
+
+print(f"\n🎉 VOLLEDIGE RUN SUCCESVOL AFGEROND!")
