@@ -1,0 +1,55 @@
+name: AutoContent OS Daily Publisher
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+    - cron: '30 13 * * *'
+    - cron: '30 19 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Code ophalen uit repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Python instellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 🎥 FFmpeg & Espeak-ng installeren (Linux)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg espeak-ng
+
+      - name: 📦 Python afhankelijkheden installeren
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-genai requests imageio-ffmpeg python-dotenv edge-tts schedule google-api-python-client google-auth-oauthlib google-auth-httplib2
+
+      - name: 🔐 Bestanden herstellen uit GitHub Secrets
+        env:
+          CLIENT_SECRET_JSON: ${{ secrets.CLIENT_SECRET_JSON }}
+          TOKEN_JSON: ${{ secrets.TOKEN_JSON }}
+        run: |
+          echo "$CLIENT_SECRET_JSON" > client_secret.json
+          echo "$TOKEN_JSON" > token.json
+
+      - name: 🎬 Video & Metadata genereren en Uploaden naar YouTube
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: |
+          python -c "
+          from topic_generator import get_daily_topic
+          import subprocess
+
+          topic = get_daily_topic()
+          print(f'🎯 Gegenereerd onderwerp: {topic}')
+
+          subprocess.run(['python', 'autocontent.py', topic], check=True)
+          subprocess.run(['python', 'upload.py'], check=True)
+          "
