@@ -43,9 +43,9 @@ else:
     CHOSEN_VOICE = VOICE_MAP[topic_key] if topic_key else random.choice(["en-US-AvaMultilingualNeural", "en-US-AndrewMultilingualNeural"])
 
 print(f"🚀 AutoContent OS: Smart Video & Metadata Generator")
-print(f"   ├─ Onderwerp: '{TOPIC}'")
-print(f"   ├─ Stem: '{CHOSEN_VOICE}'")
-print(f"   └─ Output: '{output_file.name}'\n")
+print(f"    ├─ Onderwerp: '{TOPIC}'")
+print(f"    ├─ Stem: '{CHOSEN_VOICE}'")
+print(f"    └─ Output: '{output_file.name}'\n")
 
 # Oude tijdelijke clips opruimen
 for old_clip in BASE_DIR.glob("temp_clip_*.mp4"):
@@ -94,7 +94,8 @@ if GEMINI_API_KEY:
             f"RULES:\n"
             f"1. Script length: STRICTLY 35 to 45 words total.\n"
             f"2. Title must be under 60 characters and ultra catchy.\n"
-            f"3. Keywords must be 1 to 3 simple English visual words suited for stock footage search."
+            f"3. Keywords must be 1 to 3 simple English visual words suited for stock footage search.\n"
+            f"4. HOOK RULE: Start the script IMMEDIATELY with a shocking question, counter-intuitive fact, or direct confrontation. Never use words like 'Welcome', 'Today', 'In this video', or a slow introduction."
         )
         response = client.models.generate_content(
             model='gemini-2.0-flash',
@@ -105,7 +106,6 @@ if GEMINI_API_KEY:
         script_text = data.get("script", "").strip().replace('\n', ' ')
         search_keywords = data.get("keywords", [TOPIC, TOPIC, TOPIC])
         
-        # Metadata samenstellen met de verplichte AI-disclaimer
         raw_desc = data.get("description", f"Mind blowing fact about {TOPIC}!")
         ai_disclaimer = "\n\n🤖 Note: This video contains AI-generated/altered content for educational and entertainment purposes."
         
@@ -114,20 +114,19 @@ if GEMINI_API_KEY:
             "description": raw_desc + ai_disclaimer,
             "tags": data.get("tags", [TOPIC, "Shorts", "Facts"])
         }
-        print("   └─ Gemini AI script, beeldsuggesties & metadata succesvol gegenereerd!")
+        print("    └─ Gemini AI script, beeldsuggesties & metadata succesvol gegenereerd!")
     except Exception as e:
-        print(f"   ⚠️ Fout bij Gemini AI API ({e}), terugvallen op backup metadata...")
+        print(f"    ⚠️ Fout bij Gemini AI API ({e}), terugvallen op backup metadata...")
 
 if not script_text:
     script_text = f"Did you know that if you fell into a black hole, gravity would stretch your body into a long ribbon like spaghetti? Physicists literally call this process spaghettification! Subscribe for more insane space facts!"
     search_keywords = ["galaxy space", "black hole vortex", "telescope night"]
 
-# Opslaan van de metadata JSON
 with open(metadata_file, "w", encoding="utf-8") as f:
     json.dump(youtube_metadata, f, indent=2)
 
-print(f"   ├─ Titel: \"{youtube_metadata['title']}\"")
-print(f"   └─ Beeldzoektermen: {search_keywords}\n")
+print(f"    ├─ Titel: \"{youtube_metadata['title']}\"")
+print(f"    └─ Beeldzoektermen: {search_keywords}\n")
 
 # 2. VOICE-OVER & ONDERTITELS GENEREREN
 print("2/4 🎙️ Voice-over & ondertiteling genereren...")
@@ -141,7 +140,7 @@ try:
     ]
     subprocess.run(cmd_tts, check=True)
 except Exception as e:
-    print(f"   ❌ Fout bij spraak/ondertiteling: {e}")
+    print(f"    ❌ Fout bij spraak/ondertiteling: {e}")
     exit(1)
 
 ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
@@ -220,29 +219,31 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     with open(ass_file, "w", encoding="utf-8") as f:
         f.write(ass_header + "\n".join(dialogues))
 except Exception as e:
-    print(f"   ⚠️ Fout bij ondertitel conversie: {e}")
+    print(f"    ⚠️ Fout bij ondertitel conversie: {e}")
 
-# 3. CONTEXTUAL B-ROLL OPHALEN
+# 3. WILLEKEURIGE B-ROLL OPHALEN VAN PEXELS
 clip_files = []
-print(f"3/4 🎥 Specifieke videoclips ophalen voor zoektermen...")
+print(f"3/4 🎥 Willekeurige videoclips ophalen voor zoektermen...")
 headers = {"Authorization": PEXELS_API_KEY} if PEXELS_API_KEY else {}
 
 if PEXELS_API_KEY:
     for idx, kw in enumerate(search_keywords[:3]):
         try:
-            url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=5"
+            url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=10"
             res = requests.get(url, headers=headers).json()
             if "videos" in res and len(res["videos"]) > 0:
-                video_files = res["videos"][0]["video_files"]
+                available_videos = res["videos"][:10]
+                chosen_video_item = random.choice(available_videos)
+                video_files = chosen_video_item["video_files"]
                 best_video = next((v for v in video_files if v["quality"] == "hd" and "mp4" in v["file_type"]), video_files[0])
                 clip_path = BASE_DIR / f"temp_clip_{idx}.mp4"
                 vid_data = requests.get(best_video["link"])
                 with open(clip_path, "wb") as f:
                     f.write(vid_data.content)
                 clip_files.append(clip_path)
-                print(f"   ├─ Clip {idx+1}: Gedownload voor '{kw}'")
+                print(f"    ├─ Clip {idx+1}: Willekeurig gedownload voor '{kw}'")
         except Exception as e:
-            print(f"   ⚠️ Kon geen Pexels video ophalen voor '{kw}' ({e})")
+            print(f"    ⚠️ Kon geen Pexels video ophalen voor '{kw}' ({e})")
 
 print("")
 
@@ -323,5 +324,5 @@ for cf in clip_files:
         pass
 
 print(f"\n🎉 VIDEO EN METADATA SUCCESVOL GEGENEREERD!")
-print(f"   ├─ Video: '{output_file.name}'")
-print(f"   └─ Metadata: '{metadata_file.name}'")
+print(f"    ├─ Video: '{output_file.name}'")
+print(f"    └─ Metadata: '{metadata_file.name}'")
