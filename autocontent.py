@@ -3,6 +3,7 @@ import sys
 import re
 import json
 import random
+import time
 import subprocess
 import requests
 import imageio_ffmpeg
@@ -15,6 +16,9 @@ load_dotenv()
 TOPIC = sys.argv[1] if len(sys.argv) > 1 else "Artificial Intelligence"
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+
+# Gegarandeerd unieke seed op basis van nanoseconden en proces-ID (voorkomt gelijke output bij gelijktijdige runs)
+random.seed(time.time_ns() ^ os.getpid())
 
 BASE_DIR = Path(__file__).resolve().parent
 safe_topic = "".join(c for c in TOPIC if c.isalnum() or c in (' ', '_')).rstrip().replace(' ', '_')
@@ -47,7 +51,6 @@ print(f"    ├─ Onderwerp: '{TOPIC}'")
 print(f"    ├─ Stem: '{CHOSEN_VOICE}'")
 print(f"    └─ Output: '{output_file.name}'\n")
 
-# Oude tijdelijke clips opruimen
 for old_clip in BASE_DIR.glob("temp_clip_*.mp4"):
     try:
         old_clip.unlink()
@@ -68,8 +71,8 @@ if not music_file.exists():
     except Exception:
         pass
 
-# 1. SCRIPT, KEYWORDS & YOUTUBE METADATA GENEREREN
-print("1/4 🧠 Script, Beeldzoektermen & YouTube Metadata genereren via Gemini AI...")
+# 1. SCRIPT, KEYWORDS & YOUTUBE METADATA GENEREREN (Gegarandeerd uniek per run)
+print("1/4 🧠 Uniek script, Beeldzoektermen & YouTube Metadata genereren via Gemini AI...")
 script_text = ""
 search_keywords = [TOPIC, TOPIC, TOPIC]
 youtube_metadata = {
@@ -81,8 +84,13 @@ youtube_metadata = {
 if GEMINI_API_KEY:
     try:
         client = genai.Client(api_key=GEMINI_API_KEY)
+        unique_seed = random.randint(10000000, 99999999)
+        
         prompt = (
-            f"Write a viral YouTube Short script about {TOPIC}, provide 3 visual search queries, AND generate YouTube video metadata.\n\n"
+            f"System Unique Hash: {unique_seed}\n"
+            f"Write a viral YouTube Short script about a completely unique, highly specific, and obscure sub-topic or micro-fact regarding {TOPIC}. "
+            f"CRITICAL: Avoid mainstream facts like black hole spaghettification or standard tech intro facts. Pick a weird, deep-cut, lesser-known detail. "
+            f"Provide 3 distinct visual search queries for Pexels, AND generate YouTube video metadata.\n\n"
             f"STRICT OUTPUT FORMAT (JSON only, no markdown, no backticks):\n"
             f"{{\n"
             f'  "script": "spoken text here...",\n'
@@ -100,7 +108,10 @@ if GEMINI_API_KEY:
         response = client.models.generate_content(
             model='gemini-2.0-flash',
             contents=prompt,
-            config={"response_mime_type": "application/json"}
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 1.0
+            }
         )
         data = json.loads(response.text)
         script_text = data.get("script", "").strip().replace('\n', ' ')
@@ -114,13 +125,18 @@ if GEMINI_API_KEY:
             "description": raw_desc + ai_disclaimer,
             "tags": data.get("tags", [TOPIC, "Shorts", "Facts"])
         }
-        print("    └─ Gemini AI script, beeldsuggesties & metadata succesvol gegenereerd!")
+        print("    └─ Gemini AI script, unieke beeldsuggesties & metadata succesvol gegenereerd!")
     except Exception as e:
         print(f"    ⚠️ Fout bij Gemini AI API ({e}), terugvallen op backup metadata...")
 
 if not script_text:
-    script_text = f"Did you know that if you fell into a black hole, gravity would stretch your body into a long ribbon like spaghetti? Physicists literally call this process spaghettification! Subscribe for more insane space facts!"
-    search_keywords = ["galaxy space", "black hole vortex", "telescope night"]
+    fallback_scripts = [
+        f"Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
+        f"There is a planet made entirely of burning ice where temperatures reach 800 degrees! How is that physically possible? Subscribe for more wild facts!",
+        f"Glass is technically neither a solid nor a liquid; it is a slow-moving amorphous solid! Subscribe for more mind-bending science!"
+    ]
+    script_text = random.choice(fallback_scripts)
+    search_keywords = ["clock time", "planet fire", "glass texture"]
 
 with open(metadata_file, "w", encoding="utf-8") as f:
     json.dump(youtube_metadata, f, indent=2)
@@ -229,10 +245,10 @@ headers = {"Authorization": PEXELS_API_KEY} if PEXELS_API_KEY else {}
 if PEXELS_API_KEY:
     for idx, kw in enumerate(search_keywords[:3]):
         try:
-            url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=10"
+            url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=15"
             res = requests.get(url, headers=headers).json()
             if "videos" in res and len(res["videos"]) > 0:
-                available_videos = res["videos"][:10]
+                available_videos = res["videos"][:15]
                 chosen_video_item = random.choice(available_videos)
                 video_files = chosen_video_item["video_files"]
                 best_video = next((v for v in video_files if v["quality"] == "hd" and "mp4" in v["file_type"]), video_files[0])
