@@ -19,7 +19,6 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent
 history_file = BASE_DIR / "history.json"
 
-# Zorg dat credentials bestanden automatisch worden aangemaakt vanuit GitHub Secrets indien aanwezig
 if os.getenv("CLIENT_SECRET_JSON") and not Path("client_secret.json").exists():
     with open("client_secret.json", "w", encoding="utf-8") as f:
         f.write(os.getenv("CLIENT_SECRET_JSON"))
@@ -37,21 +36,15 @@ if history_file.exists():
         pass
 
 MASTER_TOPICS = [
-    "Quantum Physics Oddities", 
-    "Deep Ocean Trenches and Monsters", 
-    "Ancient Roman Engineering Secrets", 
-    "Human Brain Psychology Hacks", 
-    "Bizarre Space Weather and Black Holes", 
-    "Lost Historical Treasures", 
-    "Microscopic Creatures and Insects", 
-    "Strange Laws That Still Exist Today", 
-    "Weird Animal Survival Tactics", 
-    "Forbidden Archaeology Discoveries", 
-    "Cybersecurity and Digital Myths", 
-    "Extreme Earth Survival Stories",
-    "Medical Oddities of the Human Body",
-    "Conspiracies That Turned Out To Be True",
-    "Bizarre Planet Facts in our Solar System"
+    "Quantum Physics Oddities", "Deep Ocean Trenches and Monsters", "Ancient Roman Engineering Secrets", 
+    "Human Brain Psychology Hacks", "Bizarre Space Weather and Black Holes", "Lost Historical Treasures", 
+    "Microscopic Creatures and Insects", "Strange Laws That Still Exist Today", "Weird Animal Survival Tactics", 
+    "Forbidden Archaeology Discoveries", "Cybersecurity and Digital Myths", "Extreme Earth Survival Stories",
+    "Medical Oddities of the Human Body", "Conspiracies That Turned Out To Be True", "Bizarre Planet Facts in our Solar System",
+    "Unsolved Deep Sea Mysteries", "Cryptids and Mythical Creatures Explained", "The Dark Side of Space Exploration",
+    "Bizarre Body Modifications Through History", "Hidden Rooms in Famous Landmarks", "Strange Historical Medical Treatments",
+    "The Weirdest Patents Ever Granted", "Unexplained Natural Phenomena on Earth", "Psychological Experiments That Went Too Far",
+    "Lost Civilizations and Technologies", "Bizarre Deep Space Signals", "Unusual Animal Friendships and Behaviors"
 ]
 
 available_topics = [t for t in MASTER_TOPICS if t not in history_data.get("topics", [])]
@@ -129,7 +122,7 @@ if GEMINI_API_KEY:
     try:
         client = genai.Client(api_key=GEMINI_API_KEY)
         unique_seed = random.randint(10000000, 99999999)
-        previous_scripts_snippet = "\n".join([f"- {s}" for s in history_data.get("scripts", [])[-15:]])
+        previous_scripts_snippet = "\n".join([f"- {s}" for s in history_data.get("scripts", [])[-30:]])
         
         prompt = (
             f"System Unique Hash ID: {unique_seed}\n"
@@ -284,9 +277,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 except Exception as e:
     print(f"    ⚠️ Fout bij ondertitel conversie: {e}")
 
-# 3. WILLEKEURIGE B-ROLL OPHALEN VAN PEXELS
+# 3. WILLEKEURIGE GEGARANDEERD UNIEKE B-ROLL OPHALEN VAN PEXELS
 clip_files = []
-print(f"3/5 🎥 Willekeurige videoclips ophalen voor zoektermen...")
+seen_video_ids = set()
+print(f"3/5 🎥 Unieke videoclips ophalen voor zoektermen...")
 headers = {"Authorization": PEXELS_API_KEY} if PEXELS_API_KEY else {}
 
 if PEXELS_API_KEY:
@@ -295,8 +289,14 @@ if PEXELS_API_KEY:
             url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=20"
             res = requests.get(url, headers=headers).json()
             if "videos" in res and len(res["videos"]) > 0:
-                available_videos = res["videos"][:20]
+                # Filter out clips already used in this video
+                available_videos = [v for v in res["videos"][:20] if v["id"] not in seen_video_ids]
+                if not available_videos:
+                    available_videos = res["videos"][:20]
+                
                 chosen_video_item = random.choice(available_videos)
+                seen_video_ids.add(chosen_video_item["id"])
+                
                 video_files = chosen_video_item["video_files"]
                 best_video = next((v for v in video_files if v["quality"] == "hd" and "mp4" in v["file_type"]), video_files[0])
                 clip_path = BASE_DIR / f"temp_clip_{idx}.mp4"
@@ -363,7 +363,7 @@ else:
     else:
         cmd.extend(["-map", "0:v:0", "-map", "1:a:0"])
 
-    vf_fallback = f"scale=1280:2272,zoompan=z='min(zoom+0.0015,1.3)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=25*30:s=1080x1920,subtitles=filename='{clean_ass_path}'"
+    vf_fallback = f"scale=1280:2272,zoompan=z='min(zoom+0.0015,1.3)':x='iw/2-(iw/zoom/2)':y='ih/2-(iw/zoom/2)':d=25*30:s=1080x1920,subtitles=filename='{clean_ass_path}'"
     cmd.extend(["-vf", vf_fallback])
 
 cmd.extend([
@@ -383,7 +383,7 @@ for cf in clip_files:
     except Exception:
         pass
 
-# 5. AUTOMATISCHE YOUTUBE UPLOAD (VIA BESTAANDE TOKEN_JSON & CLIENT_SECRET_JSON)
+# 5. AUTOMATISCHE YOUTUBE UPLOAD
 print("5/5 📤 Automatisch uploaden naar YouTube...")
 if Path("token.json").exists():
     try:

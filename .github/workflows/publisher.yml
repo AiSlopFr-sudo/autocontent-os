@@ -38,6 +38,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.io"
+          git pull origin main --rebase || true
           git add history.json video_*.mp4 video_*.json 2>/dev/null || true
           git commit -m "Auto: Generated 1 unique video, uploaded to YouTube and updated history [skip ci]" || echo "No changes to commit"
-          git push
+          git push || (git pull origin main --rebase && git push)
