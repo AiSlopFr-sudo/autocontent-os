@@ -13,14 +13,55 @@ from google import genai
 
 load_dotenv()
 
-TOPIC = sys.argv[1] if len(sys.argv) > 1 else "Artificial Intelligence"
+BASE_DIR = Path(__file__).resolve().parent
+history_file = BASE_DIR / "history.json"
+
+# Laad eerdere geschiedenis om duplicaten te voorkomen
+history_data = {"topics": [], "scripts": []}
+if history_file.exists():
+    try:
+        with open(history_file, "r", encoding="utf-8") as f:
+            history_data = json.load(f)
+    except Exception:
+        pass
+
+MASTER_TOPICS = [
+    "Quantum Physics Oddities", 
+    "Deep Ocean Trenches and Monsters", 
+    "Ancient Roman Engineering Secrets", 
+    "Human Brain Psychology Hacks", 
+    "Bizarre Space Weather and Black Holes", 
+    "Lost Historical Treasures", 
+    "Microscopic Creatures and Insects", 
+    "Strange Laws That Still Exist Today", 
+    "Weird Animal Survival Tactics", 
+    "Forbidden Archaeology Discoveries", 
+    "Cybersecurity and Digital Myths", 
+    "Extreme Earth Survival Stories",
+    "Medical Oddities of the Human Body",
+    "Conspiracies That Turned Out To Be True",
+    "Bizarre Planet Facts in our Solar System"
+]
+
+# Filter onderwerpen die al zijn gebruikt (fail-safe)
+available_topics = [t for t in MASTER_TOPICS if t not in history_data.get("topics", [])]
+if not available_topics:
+    # Als alles op is, reset het geheugen voor onderwerpen netjes
+    available_topics = MASTER_TOPICS
+    history_data["topics"] = []
+
+INPUT_TOPIC = sys.argv[1] if len(sys.argv) > 1 else ""
+if not INPUT_TOPIC or INPUT_TOPIC.lower() in ["artificial intelligence", "space", "tech"]:
+    TOPIC = random.choice(available_topics)
+else:
+    TOPIC = INPUT_TOPIC
+
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
-# Gegarandeerd unieke seed op basis van nanoseconden en proces-ID (voorkomt gelijke output bij gelijktijdige runs)
+# Gegarandeerd unieke seed
 random.seed(time.time_ns() ^ os.getpid())
 
-BASE_DIR = Path(__file__).resolve().parent
 safe_topic = "".join(c for c in TOPIC if c.isalnum() or c in (' ', '_')).rstrip().replace(' ', '_')
 output_file = BASE_DIR / f"video_{safe_topic}.mp4"
 metadata_file = BASE_DIR / f"video_{safe_topic}.json"
@@ -40,14 +81,11 @@ VOICE_MAP = {
     "History": "en-GB-RyanNeural"
 }
 
-if len(sys.argv) > 2:
-    CHOSEN_VOICE = sys.argv[2]
-else:
-    topic_key = next((k for k in VOICE_MAP if k.lower() in TOPIC.lower()), None)
-    CHOSEN_VOICE = VOICE_MAP[topic_key] if topic_key else random.choice(["en-US-AvaMultilingualNeural", "en-US-AndrewMultilingualNeural"])
+topic_key = next((k for k in VOICE_MAP if k.lower() in TOPIC.lower()), None)
+CHOSEN_VOICE = VOICE_MAP[topic_key] if topic_key else random.choice(["en-US-AvaMultilingualNeural", "en-US-AndrewMultilingualNeural", "en-US-BrianNeural", "en-GB-RyanNeural"])
 
 print(f"🚀 AutoContent OS: Smart Video & Metadata Generator")
-print(f"    ├─ Onderwerp: '{TOPIC}'")
+print(f"    ├─ Gekozen Onderwerp: '{TOPIC}'")
 print(f"    ├─ Stem: '{CHOSEN_VOICE}'")
 print(f"    └─ Output: '{output_file.name}'\n")
 
@@ -71,7 +109,7 @@ if not music_file.exists():
     except Exception:
         pass
 
-# 1. SCRIPT, KEYWORDS & YOUTUBE METADATA GENEREREN (Gegarandeerd uniek per run)
+# 1. SCRIPT, KEYWORDS & YOUTUBE METADATA GENEREREN (Met anti-duplicaat restrictie)
 print("1/4 🧠 Uniek script, Beeldzoektermen & YouTube Metadata genereren via Gemini AI...")
 script_text = ""
 search_keywords = [TOPIC, TOPIC, TOPIC]
@@ -86,11 +124,14 @@ if GEMINI_API_KEY:
         client = genai.Client(api_key=GEMINI_API_KEY)
         unique_seed = random.randint(10000000, 99999999)
         
+        # Geef eerdere scripts mee als verboden lijst zodat de AI nooit hetzelfde vertelt
+        previous_scripts_snippet = "\n".join([f"- {s}" for s in history_data.get("scripts", [])[-10:]])
+        
         prompt = (
-            f"System Unique Hash: {unique_seed}\n"
-            f"Write a viral YouTube Short script about a completely unique, highly specific, and obscure sub-topic or micro-fact regarding {TOPIC}. "
-            f"CRITICAL: Avoid mainstream facts like black hole spaghettification or standard tech intro facts. Pick a weird, deep-cut, lesser-known detail. "
-            f"Provide 3 distinct visual search queries for Pexels, AND generate YouTube video metadata.\n\n"
+            f"System Unique Hash ID: {unique_seed}\n"
+            f"Write a viral YouTube Short script about a completely unique, highly specific, bizarre, and obscure micro-fact regarding '{TOPIC}'.\n"
+            f"CRITICAL ANTI-DUPLICATE RULE: Do NOT repeat or resemble any of these previously used scripts:\n{previous_scripts_snippet}\n\n"
+            f"Provide 3 distinct visual English search queries for Pexels stock video search, AND generate YouTube video metadata.\n\n"
             f"STRICT OUTPUT FORMAT (JSON only, no markdown, no backticks):\n"
             f"{{\n"
             f'  "script": "spoken text here...",\n'
@@ -137,6 +178,12 @@ if not script_text:
     ]
     script_text = random.choice(fallback_scripts)
     search_keywords = ["clock time", "planet fire", "glass texture"]
+
+# Sla het nieuwe onderwerp en script direct op in history.json
+history_data["topics"].append(TOPIC)
+history_data["scripts"].append(script_text)
+with open(history_file, "w", encoding="utf-8") as f:
+    json.dump(history_data, f, indent=2)
 
 with open(metadata_file, "w", encoding="utf-8") as f:
     json.dump(youtube_metadata, f, indent=2)
@@ -245,10 +292,10 @@ headers = {"Authorization": PEXELS_API_KEY} if PEXELS_API_KEY else {}
 if PEXELS_API_KEY:
     for idx, kw in enumerate(search_keywords[:3]):
         try:
-            url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=15"
+            url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=20"
             res = requests.get(url, headers=headers).json()
             if "videos" in res and len(res["videos"]) > 0:
-                available_videos = res["videos"][:15]
+                available_videos = res["videos"][:20]
                 chosen_video_item = random.choice(available_videos)
                 video_files = chosen_video_item["video_files"]
                 best_video = next((v for v in video_files if v["quality"] == "hd" and "mp4" in v["file_type"]), video_files[0])
