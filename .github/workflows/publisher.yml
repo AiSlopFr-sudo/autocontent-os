@@ -1,8 +1,10 @@
-name: AutoContent OS Daily Publisher
+name: AutoContent OS Tri-Daily Publisher
 
 on:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 8 * * *'   # Ochtend run (08:00 UTC)
+    - cron: '0 14 * * *'  # Middag run (14:00 UTC)
+    - cron: '0 20 * * *'  # Avond run (20:00 UTC)
   workflow_dispatch:
 
 jobs:
@@ -35,5 +37,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.io"
           git add history.json video_*.mp4 video_*.json 2>/dev/null || true
-          git commit -m "Auto: Generated new unique video and updated history [skip ci]" || echo "No changes to commit"
+          git commit -m "Auto: Generated 1 unique video and updated history [skip ci]" || echo "No changes to commit"
           git push

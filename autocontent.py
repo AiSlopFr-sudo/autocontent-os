@@ -43,28 +43,24 @@ MASTER_TOPICS = [
     "Bizarre Planet Facts in our Solar System"
 ]
 
-# Filter onderwerpen die al zijn gebruikt (fail-safe)
+# Filter onderwerpen die al zijn gebruikt
 available_topics = [t for t in MASTER_TOPICS if t not in history_data.get("topics", [])]
 if not available_topics:
-    # Als alles op is, reset het geheugen voor onderwerpen netjes
     available_topics = MASTER_TOPICS
     history_data["topics"] = []
 
-INPUT_TOPIC = sys.argv[1] if len(sys.argv) > 1 else ""
-if not INPUT_TOPIC or INPUT_TOPIC.lower() in ["artificial intelligence", "space", "tech"]:
-    TOPIC = random.choice(available_topics)
-else:
-    TOPIC = INPUT_TOPIC
+TOPIC = random.choice(available_topics)
+history_data["topics"].append(TOPIC)
 
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
-# Gegarandeerd unieke seed
 random.seed(time.time_ns() ^ os.getpid())
 
 safe_topic = "".join(c for c in TOPIC if c.isalnum() or c in (' ', '_')).rstrip().replace(' ', '_')
-output_file = BASE_DIR / f"video_{safe_topic}.mp4"
-metadata_file = BASE_DIR / f"video_{safe_topic}.json"
+timestamp_id = int(time.time())
+output_file = BASE_DIR / f"video_{safe_topic}_{timestamp_id}.mp4"
+metadata_file = BASE_DIR / f"video_{safe_topic}_{timestamp_id}.json"
 audio_file = BASE_DIR / "audio.mp3"
 music_file = BASE_DIR / "bg_music.mp3"
 raw_vtt_file = BASE_DIR / "subtitles_raw.vtt"
@@ -84,7 +80,7 @@ VOICE_MAP = {
 topic_key = next((k for k in VOICE_MAP if k.lower() in TOPIC.lower()), None)
 CHOSEN_VOICE = VOICE_MAP[topic_key] if topic_key else random.choice(["en-US-AvaMultilingualNeural", "en-US-AndrewMultilingualNeural", "en-US-BrianNeural", "en-GB-RyanNeural"])
 
-print(f"🚀 AutoContent OS: Smart Video & Metadata Generator")
+print(f"🚀 AutoContent OS: Single Video & Metadata Generator")
 print(f"    ├─ Gekozen Onderwerp: '{TOPIC}'")
 print(f"    ├─ Stem: '{CHOSEN_VOICE}'")
 print(f"    └─ Output: '{output_file.name}'\n")
@@ -109,7 +105,7 @@ if not music_file.exists():
     except Exception:
         pass
 
-# 1. SCRIPT, KEYWORDS & YOUTUBE METADATA GENEREREN (Met anti-duplicaat restrictie)
+# 1. SCRIPT, KEYWORDS & YOUTUBE METADATA GENEREREN
 print("1/4 🧠 Uniek script, Beeldzoektermen & YouTube Metadata genereren via Gemini AI...")
 script_text = ""
 search_keywords = [TOPIC, TOPIC, TOPIC]
@@ -123,9 +119,7 @@ if GEMINI_API_KEY:
     try:
         client = genai.Client(api_key=GEMINI_API_KEY)
         unique_seed = random.randint(10000000, 99999999)
-        
-        # Geef eerdere scripts mee als verboden lijst zodat de AI nooit hetzelfde vertelt
-        previous_scripts_snippet = "\n".join([f"- {s}" for s in history_data.get("scripts", [])[-10:]])
+        previous_scripts_snippet = "\n".join([f"- {s}" for s in history_data.get("scripts", [])[-15:]])
         
         prompt = (
             f"System Unique Hash ID: {unique_seed}\n"
@@ -179,9 +173,9 @@ if not script_text:
     script_text = random.choice(fallback_scripts)
     search_keywords = ["clock time", "planet fire", "glass texture"]
 
-# Sla het nieuwe onderwerp en script direct op in history.json
-history_data["topics"].append(TOPIC)
 history_data["scripts"].append(script_text)
+
+# Sla het bijgewerkte geheugen direct op
 with open(history_file, "w", encoding="utf-8") as f:
     json.dump(history_data, f, indent=2)
 
