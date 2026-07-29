@@ -27,11 +27,14 @@ if os.getenv("TOKEN_JSON") and not Path("token.json").exists():
     with open("token.json", "w", encoding="utf-8") as f:
         f.write(os.getenv("TOKEN_JSON"))
 
-history_data = {"topics": [], "scripts": []}
+# Geheugen uitbreiden met globale Pexels clip ID's om herhaling over runs te voorkomen
+history_data = {"topics": [], "scripts": [], "used_pexels_ids": []}
 if history_file.exists():
     try:
         with open(history_file, "r", encoding="utf-8") as f:
-            history_data = json.load(f)
+            loaded_data = json.load(f)
+            if isinstance(loaded_data, dict):
+                history_data.update(loaded_data)
     except Exception:
         pass
 
@@ -44,7 +47,10 @@ MASTER_TOPICS = [
     "Unsolved Deep Sea Mysteries", "Cryptids and Mythical Creatures Explained", "The Dark Side of Space Exploration",
     "Bizarre Body Modifications Through History", "Hidden Rooms in Famous Landmarks", "Strange Historical Medical Treatments",
     "The Weirdest Patents Ever Granted", "Unexplained Natural Phenomena on Earth", "Psychological Experiments That Went Too Far",
-    "Lost Civilizations and Technologies", "Bizarre Deep Space Signals", "Unusual Animal Friendships and Behaviors"
+    "Lost Civilizations and Technologies", "Bizarre Deep Space Signals", "Unusual Animal Friendships and Behaviors",
+    "Bizarre Deep Sea Fish Adaptations", "Bizarre Historical Weather Events", "Weird Quantum Entanglement Experiments",
+    "Strange Medical Anomalies and Conditions", "Lost Ancient Roman Technologies", "Bizarre Psychological Illusion Hacks",
+    "Unexplained Anomalies in the Sahara Desert", "Weird Plant Survival and Defense Mechanisms"
 ]
 
 available_topics = [t for t in MASTER_TOPICS if t not in history_data.get("topics", [])]
@@ -108,8 +114,8 @@ if not music_file.exists():
     except Exception:
         pass
 
-# 1. SCRIPT, KEYWORDS & SPECIFIEKE YOUTUBE TITEL GENEREREN
-print("1/5 🧠 Uniek script, Beeldzoektermen & perfect passende YouTube Metadata genereren via Gemini AI...")
+# 1. SCRIPT, HYPER-SPECIFIEKE BEELDZOEKTERMEN & TITEL GENEREREN
+print("1/5 🧠 Uniek script, visueel passende beeldsuggesties & YouTube Metadata genereren via Gemini AI...")
 script_text = ""
 search_keywords = [TOPIC, TOPIC, TOPIC]
 youtube_metadata = {
@@ -132,17 +138,16 @@ if GEMINI_API_KEY:
             f"STRICT OUTPUT FORMAT (JSON only, no markdown, no backticks):\n"
             f"{{\n"
             f'  "script": "spoken text here...",\n'
-            f'  "keywords": ["search term 1", "search term 2", "search term 3"],\n'
+            f'  "keywords": ["hyper specific visual term 1", "hyper specific visual term 2", "hyper specific visual term 3"],\n'
             f'  "title": "Ultra catchy title matching the exact micro-fact with emojis",\n'
             f'  "description": "Engaging description text including #Shorts and relevant hashtags.",\n'
             f'  "tags": ["tag1", "tag2", "tag3", "tag4"]\n'
             f"}}\n\n"
             f"RULES:\n"
             f"1. Script length: STRICTLY 35 to 45 words total.\n"
-            f"2. Title must be under 60 characters and ultra catchy.\n"
-            f"3. Keywords must be 1 to 3 simple English visual words suited for stock footage search.\n"
-            f"4. HOOK RULE: Start the script IMMEDIATELY with a shocking question, counter-intuitive fact, or direct confrontation. Never use words like 'Welcome', 'Today', 'In this video', or a slow introduction.\n"
-            f"5. TITLE RELEVANCE RULE: The title MUST directly describe the exact shocking micro-fact or core twist told in the script. Do NOT make it a broad or generic title about the main topic; it must specifically highlight the unique detail of this video."
+            f"2. Title must be under 60 characters, ultra catchy, and directly describe the exact shocking micro-fact or twist in the script.\n"
+            f"3. VISUAL MATCHING KEYWORDS RULE: The 3 keywords MUST be hyper-specific physical objects, actions, or environments directly mentioned or implied in the script (e.g., if the script mentions a clock ticking faster at high altitude, keywords should be 'pocket watch mechanism macro', 'mountain peak clouds aerial', 'spinning clock hands close up'). Never use generic words like 'science', 'space', 'history', or '{TOPIC}'.\n"
+            f"4. HOOK RULE: Start the script IMMEDIATELY with a shocking question, counter-intuitive fact, or direct confrontation. Never use words like 'Welcome', 'Today', 'In this video', or a slow introduction."
         )
         response = client.models.generate_content(
             model='gemini-2.0-flash',
@@ -164,7 +169,7 @@ if GEMINI_API_KEY:
             "description": raw_desc + ai_disclaimer,
             "tags": data.get("tags", [TOPIC, "Shorts", "Facts"])
         }
-        print("    └─ Gemini AI script, unieke beeldsuggesties & scherpe metadata succesvol gegenereerd!")
+        print("    └─ Gemini AI script, scherpe metadata & gerichte beeldsuggesties succesvol gegenereerd!")
     except Exception as e:
         print(f"    ⚠️ Fout bij Gemini AI API ({e}), terugvallen op backup metadata...")
 
@@ -175,7 +180,7 @@ if not script_text:
         f"Glass is technically neither a solid nor a liquid; it is a slow-moving amorphous solid! Subscribe for more mind-bending science!"
     ]
     script_text = random.choice(fallback_scripts)
-    search_keywords = ["clock time", "planet fire", "glass texture"]
+    search_keywords = ["pocket watch mechanism macro", "mountain peak clouds aerial", "spinning clock hands close up"]
 
 history_data["scripts"].append(script_text)
 
@@ -278,10 +283,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 except Exception as e:
     print(f"    ⚠️ Fout bij ondertitel conversie: {e}")
 
-# 3. WILLEKEURIGE GEGARANDEERD UNIEKE B-ROLL OPHALEN VAN PEXELS
+# 3. GEGARANDEERD UNIEKE B-ROLL OPHALEN VAN PEXELS (ZELFS OVER RUNS HEEN)
 clip_files = []
-seen_video_ids = set()
-print(f"3/5 🎥 Unieke videoclips ophalen voor zoektermen...")
+seen_video_ids_this_run = set()
+global_used_ids = set(history_data.get("used_pexels_ids", []))
+
+print(f"3/5 🎥 Unieke, context-passende videoclips ophalen via Pexels...")
 headers = {"Authorization": PEXELS_API_KEY} if PEXELS_API_KEY else {}
 
 if PEXELS_API_KEY:
@@ -290,12 +297,24 @@ if PEXELS_API_KEY:
             url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=20"
             res = requests.get(url, headers=headers).json()
             if "videos" in res and len(res["videos"]) > 0:
-                available_videos = [v for v in res["videos"][:20] if v["id"] not in seen_video_ids]
+                # Filter clips die al in deze run zijn gebruikt OF ooit eerder in eerdere runs zijn gebruikt
+                available_videos = [
+                    v for v in res["videos"][:20] 
+                    if v["id"] not in seen_video_ids_this_run and v["id"] not in global_used_ids
+                ]
+                
+                # Als alles al op is, val terug op videos die niet in deze run zitten
+                if not available_videos:
+                    available_videos = [v for v in res["videos"][:20] if v["id"] not in seen_video_ids_this_run]
                 if not available_videos:
                     available_videos = res["videos"][:20]
                 
                 chosen_video_item = random.choice(available_videos)
-                seen_video_ids.add(chosen_video_item["id"])
+                vid_id = chosen_video_item["id"]
+                
+                seen_video_ids_this_run.add(vid_id)
+                global_used_ids.add(vid_id)
+                history_data.setdefault("used_pexels_ids", []).append(vid_id)
                 
                 video_files = chosen_video_item["video_files"]
                 best_video = next((v for v in video_files if v["quality"] == "hd" and "mp4" in v["file_type"]), video_files[0])
@@ -306,6 +325,11 @@ if PEXELS_API_KEY:
                 clip_files.append(clip_path)
         except Exception as e:
             print(f"    ⚠️ Kon geen Pexels video ophalen voor '{kw}' ({e})")
+
+# Beperk de opgeslagen Pexels ID's in history.json zodat het bestand niet oneindig groot wordt (laatste 150)
+history_data["used_pexels_ids"] = history_data["used_pexels_ids"][-150:]
+with open(history_file, "w", encoding="utf-8") as f:
+    json.dump(history_data, f, indent=2)
 
 if not clip_files:
     img_url = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1080&auto=format&fit=crop"
