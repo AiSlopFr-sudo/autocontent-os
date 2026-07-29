@@ -27,8 +27,14 @@ if os.getenv("TOKEN_JSON") and not Path("token.json").exists():
     with open("token.json", "w", encoding="utf-8") as f:
         f.write(os.getenv("TOKEN_JSON"))
 
-# Geheugen uitbreiden met globale Pexels clip ID's om herhaling over runs te voorkomen
-history_data = {"topics": [], "scripts": [], "used_pexels_ids": []}
+# Uitgebreid persistent geheugen
+history_data = {
+    "topics": [],
+    "facts": [],
+    "titles": [],
+    "scripts": [],
+    "used_pexels_ids": []
+}
 if history_file.exists():
     try:
         with open(history_file, "r", encoding="utf-8") as f:
@@ -89,12 +95,12 @@ VOICE_MAP = {
 topic_key = next((k for k in VOICE_MAP if k.lower() in TOPIC.lower()), None)
 CHOSEN_VOICE = VOICE_MAP[topic_key] if topic_key else random.choice(["en-US-AvaMultilingualNeural", "en-US-AndrewMultilingualNeural", "en-US-BrianNeural", "en-GB-RyanNeural"])
 
-print(f"🚀 AutoContent OS: Single Video & YouTube Publisher")
+print(f"🚀 AutoContent OS v2: Scene-based Pipeline & Persistent Memory")
 print(f"    ├─ Gekozen Onderwerp: '{TOPIC}'")
 print(f"    ├─ Stem: '{CHOSEN_VOICE}'")
 print(f"    └─ Output: '{output_file.name}'\n")
 
-for old_clip in BASE_DIR.glob("temp_clip_*.mp4"):
+for old_clip in BASE_DIR.glob("temp_scene_*.mp4"):
     try:
         old_clip.unlink()
     except Exception:
@@ -114,40 +120,46 @@ if not music_file.exists():
     except Exception:
         pass
 
-# 1. SCRIPT, HYPER-SPECIFIEKE BEELDZOEKTERMEN & TITEL GENEREREN
-print("1/5 🧠 Uniek script, visueel passende beeldsuggesties & YouTube Metadata genereren via Gemini AI...")
+# 1. GEMINI: SCRIPT, SCÈNES, FACT_NAME & METADATA
+print("1/5 🧠 Genereren van uniek feit, scènes met zoekwoorden & metadata via Gemini AI...")
 script_text = ""
-search_keywords = [TOPIC, TOPIC, TOPIC]
+scenes_data = []
 youtube_metadata = {
     "title": f"Mind-Blowing Fact About {TOPIC}! #Shorts",
-    "description": f"Learn a crazy fact about {TOPIC}!\n\n🤖 Disclaimer: This video was generated using AI tools for educational purposes.\n\n#Shorts #Facts #{safe_topic}",
-    "tags": [TOPIC, "Facts", "Shorts", "Science"]
+    "description": f"Learn a crazy fact about {TOPIC}!\n\n🤖 Note: Educational AI content.\n\n#Shorts #Facts",
+    "tags": [TOPIC, "Facts", "Shorts"]
 }
 
 if GEMINI_API_KEY:
     try:
         client = genai.Client(api_key=GEMINI_API_KEY)
         unique_seed = random.randint(10000000, 99999999)
-        previous_scripts_snippet = "\n".join([f"- {s}" for s in history_data.get("scripts", [])[-30:]])
+        previous_facts_snippet = "\n".join([f"- {f}" for f in history_data.get("facts", [])[-40:]])
         
         prompt = (
             f"System Unique Hash ID: {unique_seed}\n"
-            f"Write a viral YouTube Short script about a completely unique, highly specific, bizarre, and obscure micro-fact regarding '{TOPIC}'.\n"
-            f"CRITICAL ANTI-DUPLICATE RULE: Do NOT repeat or resemble any of these previously used scripts:\n{previous_scripts_snippet}\n\n"
-            f"Provide 3 distinct visual English search queries for Pexels stock video search, AND generate YouTube video metadata.\n\n"
+            f"Create a viral YouTube Short about a completely unique, obscure, and specific micro-fact regarding '{TOPIC}'.\n"
+            f"CRITICAL ANTI-DUPLICATE RULE: Do NOT repeat or resemble any of these previously used facts:\n{previous_facts_snippet}\n\n"
+            f"Break the script down into 4 to 5 distinct chronological scenes. Each scene must have a short sentence segment and a hyper-specific English search keyword for Pexels stock video.\n\n"
             f"STRICT OUTPUT FORMAT (JSON only, no markdown, no backticks):\n"
             f"{{\n"
-            f'  "script": "spoken text here...",\n'
-            f'  "keywords": ["hyper specific visual term 1", "hyper specific visual term 2", "hyper specific visual term 3"],\n'
-            f'  "title": "Ultra catchy title matching the exact micro-fact with emojis",\n'
+            f'  "fact_name": "Short unique name of the micro-fact (e.g. Immortal Jellyfish)",\n'
+            f'  "script": "Full spoken text here...",\n'
+            f'  "title": "Ultra catchy title containing the fact_name, max 55 chars, with emojis",\n'
             f'  "description": "Engaging description text including #Shorts and relevant hashtags.",\n'
-            f'  "tags": ["tag1", "tag2", "tag3", "tag4"]\n'
+            f'  "tags": ["tag1", "tag2", "tag3"],\n'
+            f'  "scenes": [\n'
+            f'    {{"text": "First sentence part...", "keyword": "hyper-specific physical action or object"}},\n'
+            f'    {{"text": "Second sentence part...", "keyword": "hyper-specific environment or object"}},\n'
+            f'    {{"text": "Third sentence part...", "keyword": "hyper-specific close up object"}},\n'
+            f'    {{"text": "Fourth sentence part...", "keyword": "hyper-specific striking visual"}}\n'
+            f'  ]\n'
             f"}}\n\n"
             f"RULES:\n"
-            f"1. Script length: STRICTLY 35 to 45 words total.\n"
-            f"2. Title must be under 60 characters, ultra catchy, and directly describe the exact shocking micro-fact or twist in the script.\n"
-            f"3. VISUAL MATCHING KEYWORDS RULE: The 3 keywords MUST be hyper-specific physical objects, actions, or environments directly mentioned or implied in the script (e.g., if the script mentions a clock ticking faster at high altitude, keywords should be 'pocket watch mechanism macro', 'mountain peak clouds aerial', 'spinning clock hands close up'). Never use generic words like 'science', 'space', 'history', or '{TOPIC}'.\n"
-            f"4. HOOK RULE: Start the script IMMEDIATELY with a shocking question, counter-intuitive fact, or direct confrontation. Never use words like 'Welcome', 'Today', 'In this video', or a slow introduction."
+            f"1. Total script length: STRICTLY 35 to 45 words.\n"
+            f"2. Title must directly describe the exact micro-fact, never generic.\n"
+            f"3. SCENE VISUAL MATCHING: Each scene's keyword must strictly match what is being said in that specific sentence fragment. No generic words like 'science' or 'space'.\n"
+            f"4. HOOK: Start immediately with a shocking statement."
         )
         response = client.models.generate_content(
             model='gemini-2.0-flash',
@@ -159,33 +171,35 @@ if GEMINI_API_KEY:
         )
         data = json.loads(response.text)
         script_text = data.get("script", "").strip().replace('\n', ' ')
-        search_keywords = data.get("keywords", [TOPIC, TOPIC, TOPIC])
+        fact_name = data.get("fact_name", TOPIC)
+        scenes_data = data.get("scenes", [])
         
         raw_desc = data.get("description", f"Mind blowing fact about {TOPIC}!")
-        ai_disclaimer = "\n\n🤖 Note: This video contains AI-generated/altered content for educational and entertainment purposes."
+        ai_disclaimer = "\n\n🤖 Note: This video contains AI-generated content for educational and entertainment purposes."
         
         youtube_metadata = {
             "title": data.get("title", f"Insane {TOPIC} Fact! #Shorts"),
             "description": raw_desc + ai_disclaimer,
             "tags": data.get("tags", [TOPIC, "Shorts", "Facts"])
         }
-        print("    └─ Gemini AI script, scherpe metadata & gerichte beeldsuggesties succesvol gegenereerd!")
+        
+        history_data["facts"].append(fact_name)
+        history_data["titles"].append(youtube_metadata["title"])
+        print("    └─ Gemini AI script, scènes & metadata succesvol gegenereerd!")
     except Exception as e:
-        print(f"    ⚠️ Fout bij Gemini AI API ({e}), terugvallen op backup metadata...")
+        print(f"    ⚠️ Fout bij Gemini AI API ({e}), terugvallen op backup...")
 
-if not script_text:
-    fallback_scripts = [
-        f"Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
-        f"There is a planet made entirely of burning ice where temperatures reach 800 degrees! How is that physically possible? Subscribe for more wild facts!",
-        f"Glass is technically neither a solid nor a liquid; it is a slow-moving amorphous solid! Subscribe for more mind-bending science!"
+if not script_text or not scenes_data:
+    script_text = "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
+    fact_name = "Altitude Time Dilation"
+    scenes_data = [
+        {"text": "Did you know time actually passes faster", "keyword": "pocket watch mechanism macro"},
+        {"text": "the higher you are from sea level?", "keyword": "mountain peak clouds aerial"},
+        {"text": "Your head ages fractionally faster than your feet!", "keyword": "person walking stairs low angle"},
+        {"text": "Subscribe for more insane facts!", "keyword": "neon subscribe button close up"}
     ]
-    script_text = random.choice(fallback_scripts)
-    search_keywords = ["pocket watch mechanism macro", "mountain peak clouds aerial", "spinning clock hands close up"]
 
 history_data["scripts"].append(script_text)
-
-with open(history_file, "w", encoding="utf-8") as f:
-    json.dump(history_data, f, indent=2)
 
 with open(metadata_file, "w", encoding="utf-8") as f:
     json.dump(youtube_metadata, f, indent=2)
@@ -283,112 +297,111 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 except Exception as e:
     print(f"    ⚠️ Fout bij ondertitel conversie: {e}")
 
-# 3. GEGARANDEERD UNIEKE B-ROLL OPHALEN VAN PEXELS (ZELFS OVER RUNS HEEN)
-clip_files = []
+# 3. SCENE-BASED B-ROLL OPHALEN VAN PEXELS
+scene_clips = []
 seen_video_ids_this_run = set()
 global_used_ids = set(history_data.get("used_pexels_ids", []))
 
-print(f"3/5 🎥 Unieke, context-passende videoclips ophalen via Pexels...")
+print(f"3/5 🎥 Scène-gebaseerde unieke videoclips ophalen via Pexels...")
 headers = {"Authorization": PEXELS_API_KEY} if PEXELS_API_KEY else {}
 
-if PEXELS_API_KEY:
-    for idx, kw in enumerate(search_keywords[:3]):
+total_scene_chars = sum(len(s["text"]) for s in scenes_data)
+if total_scene_chars == 0:
+    total_scene_chars = 1
+
+for idx, scene in enumerate(scenes_data):
+    kw = scene["keyword"]
+    scene_duration = (len(scene["text"]) / total_scene_chars) * audio_duration
+    scene_duration = max(scene_duration, 1.55)
+
+    clip_path = BASE_DIR / f"temp_scene_{idx}.mp4"
+    downloaded = False
+
+    if PEXELS_API_KEY:
         try:
-            url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=20"
+            url = f"https://api.pexels.com/videos/search?query={kw}&orientation=portrait&per_page=15"
             res = requests.get(url, headers=headers).json()
             if "videos" in res and len(res["videos"]) > 0:
-                # Filter clips die al in deze run zijn gebruikt OF ooit eerder in eerdere runs zijn gebruikt
                 available_videos = [
-                    v for v in res["videos"][:20] 
+                    v for v in res["videos"][:15] 
                     if v["id"] not in seen_video_ids_this_run and v["id"] not in global_used_ids
                 ]
-                
-                # Als alles al op is, val terug op videos die niet in deze run zitten
                 if not available_videos:
-                    available_videos = [v for v in res["videos"][:20] if v["id"] not in seen_video_ids_this_run]
+                    available_videos = [v for v in res["videos"][:15] if v["id"] not in seen_video_ids_this_run]
                 if not available_videos:
-                    available_videos = res["videos"][:20]
+                    available_videos = res["videos"][:15]
                 
-                chosen_video_item = random.choice(available_videos)
-                vid_id = chosen_video_item["id"]
-                
+                chosen_item = random.choice(available_videos)
+                vid_id = chosen_item["id"]
                 seen_video_ids_this_run.add(vid_id)
                 global_used_ids.add(vid_id)
                 history_data.setdefault("used_pexels_ids", []).append(vid_id)
-                
-                video_files = chosen_video_item["video_files"]
+
+                video_files = chosen_item["video_files"]
                 best_video = next((v for v in video_files if v["quality"] == "hd" and "mp4" in v["file_type"]), video_files[0])
-                clip_path = BASE_DIR / f"temp_clip_{idx}.mp4"
+                
                 vid_data = requests.get(best_video["link"])
                 with open(clip_path, "wb") as f:
                     f.write(vid_data.content)
-                clip_files.append(clip_path)
+                scene_clips.append((clip_path, scene_duration))
+                downloaded = True
         except Exception as e:
-            print(f"    ⚠️ Kon geen Pexels video ophalen voor '{kw}' ({e})")
+            print(f"    ⚠️ Kon geen Pexels clip ophalen voor scène {idx} ('{kw}'): {e}")
 
-# Beperk de opgeslagen Pexels ID's in history.json zodat het bestand niet oneindig groot wordt (laatste 150)
+    if not downloaded:
+        img_url = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1080&auto=format&fit=crop"
+        img_res = requests.get(img_url)
+        with open(bg_image, "wb") as f:
+            f.write(img_res.content)
+        scene_clips.append((bg_image, scene_duration))
+
 history_data["used_pexels_ids"] = history_data["used_pexels_ids"][-150:]
-with open(history_file, "w", encoding="utf-8") as f:
-    json.dump(history_data, f, indent=2)
 
-if not clip_files:
-    img_url = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1080&auto=format&fit=crop"
-    img_res = requests.get(img_url)
-    with open(bg_image, "wb") as f:
-        f.write(img_res.content)
-
-# 4. EINDMONTAGE
-print("4/5 🎬 Vloeiende eindmontage starten...")
+# 4. EINDMONTAGE MET SCÈNE TIMINGS
+print("4/5 🎬 Vloeiende eindmontage starten op basis van scènes...")
 clean_ass_path = str(ass_file).replace(":", "\\:")
 use_music = music_file.exists() and music_file.stat().st_size > 50000
 
 filter_parts = []
 cmd = [ffmpeg_exe, "-y"]
 
-if clip_files:
-    for cf in clip_files:
+for i, (cf, dur) in enumerate(scene_clips):
+    if cf == bg_image:
+        cmd.extend(["-loop", "1", "-i", str(cf)])
+    else:
         cmd.extend(["-stream_loop", "-1", "-i", str(cf)])
-    
-    cmd.extend(["-i", str(audio_file)])
-    voice_idx = len(clip_files)
-    
-    if use_music:
-        cmd.extend(["-i", str(music_file)])
-        music_idx = len(clip_files) + 1
 
-    clip_dur = audio_duration / len(clip_files)
-    concat_inputs = ""
+cmd.extend(["-i", str(audio_file)])
+voice_idx = len(scene_clips)
 
-    for i in range(len(clip_files)):
+if use_music:
+    cmd.extend(["-i", str(music_file)])
+    music_idx = len(scene_clips) + 1
+
+concat_inputs = ""
+for i, (cf, dur) in enumerate(scene_clips):
+    if cf == bg_image:
         filter_parts.append(
-            f"[{i}:v]trim=0:{clip_dur:.2f},setpts=PTS-STARTPTS,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,fps=30[v{i}]"
+            f"[{i}:v]scale=1280:2272,zoompan=z='min(zoom+0.0015,1.3)':x='iw/2-(iw/zoom/2)':y='ih/2-(iw/zoom/2)':d={int(dur*30)}:s=1080x1920,fps=30,trim=duration={dur:.2f}[v{i}]"
         )
-        concat_inputs += f"[v{i}]"
-
-    filter_parts.append(f"{concat_inputs}concat=n={len(clip_files)}:v=1:a=0[vconcat]")
-    filter_parts.append(f"[vconcat]subtitles=filename='{clean_ass_path}'[vout]")
-
-    if use_music:
-        filter_parts.append(f"[{voice_idx}:a]volume=1.0[vstem];[{music_idx}:a]volume=0.25[mstem];[vstem][mstem]amix=inputs=2:duration=first[aout]")
-    
-    cmd.extend(["-filter_complex", ";".join(filter_parts)])
-    cmd.extend(["-map", "[vout]"])
-    if use_music:
-        cmd.extend(["-map", "[aout]"])
     else:
-        cmd.extend(["-map", f"{voice_idx}:a:0"])
+        filter_parts.append(
+            f"[{i}:v]trim=0:{dur:.2f},setpts=PTS-STARTPTS,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,fps=30[v{i}]"
+        )
+    concat_inputs += f"[v{i}]"
 
+filter_parts.append(f"{concat_inputs}concat=n={len(scene_clips)}:v=1:a=0[vconcat]")
+filter_parts.append(f"[vconcat]subtitles=filename='{clean_ass_path}'[vout]")
+
+if use_music:
+    filter_parts.append(f"[{voice_idx}:a]volume=1.0[vstem];[{music_idx}:a]volume=0.25[mstem];[vstem][mstem]amix=inputs=2:duration=first[aout]")
+
+cmd.extend(["-filter_complex", ";".join(filter_parts)])
+cmd.extend(["-map", "[vout]"])
+if use_music:
+    cmd.extend(["-map", "[aout]"])
 else:
-    cmd.extend(["-loop", "1", "-i", str(bg_image), "-i", str(audio_file)])
-    if use_music:
-        cmd.extend(["-i", str(music_file)])
-        filter_parts.append("[1:a]volume=1.0[vstem];[2:a]volume=0.25[mstem];[vstem][mstem]amix=inputs=2:duration=first[aout]")
-        cmd.extend(["-filter_complex", ";".join(filter_parts), "-map", "0:v:0", "-map", "[aout]"])
-    else:
-        cmd.extend(["-map", "0:v:0", "-map", "1:a:0"])
-
-    vf_fallback = f"scale=1280:2272,zoompan=z='min(zoom+0.0015,1.3)':x='iw/2-(iw/zoom/2)':y='ih/2-(iw/zoom/2)':d=25*30:s=1080x1920,subtitles=filename='{clean_ass_path}'"
-    cmd.extend(["-vf", vf_fallback])
+    cmd.extend(["-map", f"{voice_idx}:a:0"])
 
 cmd.extend([
     "-t", f"{audio_duration:.2f}",
@@ -401,11 +414,12 @@ cmd.extend([
 
 subprocess.run(cmd, check=True)
 
-for cf in clip_files:
-    try:
-        cf.unlink()
-    except Exception:
-        pass
+for cf, _ in scene_clips:
+    if "temp_scene_" in str(cf):
+        try:
+            cf.unlink()
+        except Exception:
+            pass
 
 # 5. AUTOMATISCHE YOUTUBE UPLOAD
 print("5/5 📤 Automatisch uploaden naar YouTube...")
@@ -446,5 +460,20 @@ if Path("token.json").exists():
         print(f"    ❌ Fout bij YouTube upload: {e}")
 else:
     print("    ⚠️ Geen token.json gevonden; video is alleen op GitHub opgeslagen.")
+
+# 6. PERMANENT GEHEUGEN TERUGCOMMITTEERD NAAR GITHUB
+print("6/6 💾 Permanent geheugen opslaan in GitHub repository...")
+with open(history_file, "w", encoding="utf-8") as f:
+    json.dump(history_data, f, indent=2)
+
+try:
+    subprocess.run(["git", "config", "user.name", "github-actions[bot]"], check=True)
+    subprocess.run(["git", "config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com"], check=True)
+    subprocess.run(["git", "add", str(history_file)], check=True)
+    subprocess.run(["git", "commit", "-m", f"chore: update history.json for topic {TOPIC} [skip ci]"], check=True)
+    subprocess.run(["git", "push"], check=True)
+    print("    └─ ✅ History.json succesvol gepusht naar GitHub!")
+except Exception as e:
+    print(f"    ⚠️ Git push mislukt: {e}")
 
 print(f"\n🎉 VOLLEDIGE RUN SUCCESVOL AFGEROND!")
