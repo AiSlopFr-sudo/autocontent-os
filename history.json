@@ -27,9 +27,11 @@
     "Quantum Physics Oddities",
     "Bizarre Planet Facts in our Solar System",
     "Lost Ancient Roman Technologies",
-    "Cybersecurity and Digital Myths"
+    "Cybersecurity and Digital Myths",
+    "Medical Oddities of the Human Body"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -65,6 +67,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -76,6 +79,7 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "There is a planet made entirely of burning ice where temperatures reach 800 degrees! How is that physically possible? Subscribe for more wild facts!",
+    "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
@@ -177,7 +181,11 @@
     8322047,
     27977358,
     7253196,
-    15439756
+    15439756,
+    8322047,
+    36915013,
+    8558508,
+    15440318
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -229,6 +237,9 @@
       "Altitude Time Dilation"
     ],
     "Cybersecurity and Digital Myths": [
+      "Altitude Time Dilation"
+    ],
+    "Medical Oddities of the Human Body": [
       "Altitude Time Dilation"
     ]
   }
