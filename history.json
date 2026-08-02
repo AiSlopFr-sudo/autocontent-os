@@ -28,9 +28,11 @@
     "Bizarre Planet Facts in our Solar System",
     "Lost Ancient Roman Technologies",
     "Cybersecurity and Digital Myths",
-    "Medical Oddities of the Human Body"
+    "Medical Oddities of the Human Body",
+    "Bizarre Psychological Illusion Hacks"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -68,6 +70,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -79,6 +82,7 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "There is a planet made entirely of burning ice where temperatures reach 800 degrees! How is that physically possible? Subscribe for more wild facts!",
+    "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
@@ -185,6 +189,10 @@
     8322047,
     36915013,
     8558508,
+    15440318,
+    8322145,
+    27977358,
+    5983912,
     15440318
   ],
   "topic_facts": {
@@ -240,6 +248,9 @@
       "Altitude Time Dilation"
     ],
     "Medical Oddities of the Human Body": [
+      "Altitude Time Dilation"
+    ],
+    "Bizarre Psychological Illusion Hacks": [
       "Altitude Time Dilation"
     ]
   }
