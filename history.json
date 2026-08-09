@@ -12,9 +12,11 @@
     "Unexplained Natural Phenomena on Earth",
     "Medical Oddities of the Human Body",
     "Unsolved Deep Sea Mysteries",
-    "Bizarre Space Weather and Black Holes"
+    "Bizarre Space Weather and Black Holes",
+    "Lost Civilizations and Technologies"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -54,6 +56,7 @@
     "Altitude Time Dilation"
   ],
   "titles": [
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
@@ -140,13 +143,10 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
+    "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    5950723,
-    15439750,
-    8321929,
-    38542429,
     5636768,
     4841217,
     8322145,
@@ -292,6 +292,10 @@
     8321927,
     36915013,
     8348130,
+    15439746,
+    8322043,
+    38542429,
+    8558508,
     15439746
   ],
   "topic_facts": {
@@ -388,6 +392,9 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Space Weather and Black Holes": [
+      "Altitude Time Dilation"
+    ],
+    "Lost Civilizations and Technologies": [
       "Altitude Time Dilation"
     ]
   }
