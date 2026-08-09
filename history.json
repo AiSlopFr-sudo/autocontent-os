@@ -11,9 +11,11 @@
     "Conspiracies That Turned Out To Be True",
     "Unexplained Natural Phenomena on Earth",
     "Medical Oddities of the Human Body",
-    "Unsolved Deep Sea Mysteries"
+    "Unsolved Deep Sea Mysteries",
+    "Bizarre Space Weather and Black Holes"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -52,6 +54,7 @@
     "Altitude Time Dilation"
   ],
   "titles": [
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
@@ -136,13 +139,10 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
+    "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    15386816,
-    15439743,
-    8321921,
-    36330048,
     5950723,
     15439750,
     8321929,
@@ -288,7 +288,11 @@
     7034335,
     36915013,
     6345049,
-    4883865
+    4883865,
+    8321927,
+    36915013,
+    8348130,
+    15439746
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -381,6 +385,9 @@
       "Altitude Time Dilation"
     ],
     "Conspiracies That Turned Out To Be True": [
+      "Altitude Time Dilation"
+    ],
+    "Bizarre Space Weather and Black Holes": [
       "Altitude Time Dilation"
     ]
   }
