@@ -13,9 +13,11 @@
     "Medical Oddities of the Human Body",
     "Unsolved Deep Sea Mysteries",
     "Bizarre Space Weather and Black Holes",
-    "Lost Civilizations and Technologies"
+    "Lost Civilizations and Technologies",
+    "Weird Animal Survival Tactics"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -56,6 +58,7 @@
     "Altitude Time Dilation"
   ],
   "titles": [
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
@@ -144,13 +147,10 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
+    "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    5636768,
-    4841217,
-    8322145,
-    30270975,
     8558508,
     15439745,
     8322047,
@@ -296,7 +296,11 @@
     8322043,
     38542429,
     8558508,
-    15439746
+    15439746,
+    7034335,
+    27977358,
+    6345049,
+    15440318
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -395,6 +399,9 @@
       "Altitude Time Dilation"
     ],
     "Lost Civilizations and Technologies": [
+      "Altitude Time Dilation"
+    ],
+    "Weird Animal Survival Tactics": [
       "Altitude Time Dilation"
     ]
   }
