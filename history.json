@@ -21,9 +21,11 @@
     "Human Brain Psychology Hacks",
     "Quantum Physics Oddities",
     "Unusual Animal Friendships and Behaviors",
-    "Ancient Roman Engineering Secrets"
+    "Ancient Roman Engineering Secrets",
+    "Lost Historical Treasures"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -72,6 +74,7 @@
     "Altitude Time Dilation"
   ],
   "titles": [
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
@@ -176,13 +179,10 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
+    "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    15386816,
-    15440319,
-    8321927,
-    36330048,
     7253196,
     4841217,
     8322145,
@@ -328,7 +328,11 @@
     8322047,
     38787756,
     7253196,
-    15440318
+    15440318,
+    8322047,
+    32693344,
+    5636768,
+    15439745
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -439,6 +443,9 @@
       "Altitude Time Dilation"
     ],
     "Ancient Roman Engineering Secrets": [
+      "Altitude Time Dilation"
+    ],
+    "Lost Historical Treasures": [
       "Altitude Time Dilation"
     ]
   }
