@@ -20,9 +20,11 @@
     "Cybersecurity and Digital Myths",
     "Human Brain Psychology Hacks",
     "Quantum Physics Oddities",
-    "Unusual Animal Friendships and Behaviors"
+    "Unusual Animal Friendships and Behaviors",
+    "Ancient Roman Engineering Secrets"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -70,6 +72,7 @@
     "Altitude Time Dilation"
   ],
   "titles": [
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
@@ -172,13 +175,10 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
+    "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    7253196,
-    15440318,
-    34343459,
-    36915013,
     15386816,
     15440319,
     8321927,
@@ -324,7 +324,11 @@
     8322145,
     30270975,
     5983912,
-    15440319
+    15440319,
+    8322047,
+    38787756,
+    7253196,
+    15440318
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -432,6 +436,9 @@
       "Altitude Time Dilation"
     ],
     "Weird Animal Survival Tactics": [
+      "Altitude Time Dilation"
+    ],
+    "Ancient Roman Engineering Secrets": [
       "Altitude Time Dilation"
     ]
   }
