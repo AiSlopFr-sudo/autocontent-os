@@ -22,9 +22,11 @@
     "Quantum Physics Oddities",
     "Unusual Animal Friendships and Behaviors",
     "Ancient Roman Engineering Secrets",
-    "Lost Historical Treasures"
+    "Lost Historical Treasures",
+    "Strange Historical Medical Treatments"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -74,6 +76,7 @@
     "Altitude Time Dilation"
   ],
   "titles": [
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
@@ -180,13 +183,10 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
+    "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!",
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    7253196,
-    4841217,
-    8322145,
-    7593613,
     15386816,
     15440318,
     8322043,
@@ -332,7 +332,11 @@
     8322047,
     32693344,
     5636768,
-    15439745
+    15439745,
+    8321929,
+    8062894,
+    5983912,
+    4841217
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -412,6 +416,7 @@
       "Altitude Time Dilation"
     ],
     "Strange Historical Medical Treatments": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation"
     ],
     "Bizarre Historical Weather Events": [
