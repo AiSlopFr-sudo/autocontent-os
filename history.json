@@ -33,9 +33,11 @@
     "Lost Historical Treasures",
     "Bizarre Historical Weather Events",
     "Unexplained Anomalies in the Sahara Desert",
-    "The Weirdest Patents Ever Granted"
+    "The Weirdest Patents Ever Granted",
+    "Cybersecurity and Digital Myths"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -363,6 +365,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -518,10 +521,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    6345049,
-    4883865,
-    8321929,
-    27977358,
     15386816,
     15439746,
     8322145,
@@ -667,7 +666,11 @@
     8321899,
     38787756,
     15386816,
-    15439745
+    15439745,
+    8322145,
+    39107544,
+    5983912,
+    15439756
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -783,6 +786,7 @@
       "Altitude Time Dilation"
     ],
     "Cybersecurity and Digital Myths": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
