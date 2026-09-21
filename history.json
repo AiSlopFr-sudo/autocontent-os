@@ -31,9 +31,11 @@
     "Bizarre Planet Facts in our Solar System",
     "Deep Ocean Trenches and Monsters",
     "Lost Historical Treasures",
-    "Bizarre Historical Weather Events"
+    "Bizarre Historical Weather Events",
+    "Unexplained Anomalies in the Sahara Desert"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -357,6 +359,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -513,10 +516,6 @@
   ],
   "used_pexels_ids": [
     8558508,
-    15439746,
-    8322145,
-    27977358,
-    8558508,
     4841217,
     8322047,
     8062894,
@@ -661,7 +660,11 @@
     8322145,
     39107095,
     10251032,
-    15439746
+    15439746,
+    8322047,
+    39408073,
+    6345049,
+    4883865
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -686,6 +689,7 @@
       "Altitude Time Dilation"
     ],
     "Unexplained Anomalies in the Sahara Desert": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
