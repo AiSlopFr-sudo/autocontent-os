@@ -1,42 +1,9 @@
 {
   "topics": [
-    "Unusual Animal Friendships and Behaviors",
-    "Bizarre Psychological Illusion Hacks",
-    "Lost Ancient Roman Technologies",
-    "Bizarre Space Weather and Black Holes",
-    "Bizarre Deep Sea Fish Adaptations",
-    "Cryptids and Mythical Creatures Explained",
-    "Weird Plant Survival and Defense Mechanisms",
-    "Lost Civilizations and Technologies",
-    "Extreme Earth Survival Stories",
-    "Medical Oddities of the Human Body",
-    "Bizarre Body Modifications Through History",
-    "Strange Historical Medical Treatments",
-    "Bizarre Deep Space Signals",
-    "Strange Laws That Still Exist Today",
-    "Weird Quantum Entanglement Experiments",
-    "Ancient Roman Engineering Secrets",
-    "Strange Medical Anomalies and Conditions",
-    "Forbidden Archaeology Discoveries",
-    "Unsolved Deep Sea Mysteries",
-    "Quantum Physics Oddities",
-    "Weird Animal Survival Tactics",
-    "Human Brain Psychology Hacks",
-    "Psychological Experiments That Went Too Far",
-    "Microscopic Creatures and Insects",
-    "Unexplained Natural Phenomena on Earth",
-    "Hidden Rooms in Famous Landmarks",
-    "The Dark Side of Space Exploration",
-    "Conspiracies That Turned Out To Be True",
-    "Bizarre Planet Facts in our Solar System",
-    "Deep Ocean Trenches and Monsters",
-    "Lost Historical Treasures",
-    "Bizarre Historical Weather Events",
-    "Unexplained Anomalies in the Sahara Desert",
-    "The Weirdest Patents Ever Granted",
-    "Cybersecurity and Digital Myths"
+    "The Dark Side of Space Exploration"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -366,6 +333,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -521,10 +489,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    15386816,
-    15439746,
-    8322145,
-    38542429,
     6345049,
     15439745,
     8321927,
@@ -670,7 +634,11 @@
     8322145,
     39107544,
     5983912,
-    15439756
+    15439756,
+    8322047,
+    39107546,
+    7253196,
+    4883865
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -702,6 +670,7 @@
       "Altitude Time Dilation"
     ],
     "The Dark Side of Space Exploration": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
