@@ -4,9 +4,11 @@
     "Strange Medical Anomalies and Conditions",
     "Bizarre Historical Weather Events",
     "Unusual Animal Friendships and Behaviors",
-    "Human Brain Psychology Hacks"
+    "Human Brain Psychology Hacks",
+    "Quantum Physics Oddities"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -346,6 +348,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -502,10 +505,6 @@
   ],
   "used_pexels_ids": [
     5983912,
-    15439746,
-    34343459,
-    8062894,
-    5983912,
     4883865,
     34343459,
     38542429,
@@ -650,7 +649,11 @@
     8322282,
     39408072,
     5636768,
-    4883865
+    4883865,
+    34343459,
+    36915013,
+    5983912,
+    4841217
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -748,6 +751,7 @@
       "Altitude Time Dilation"
     ],
     "Quantum Physics Oddities": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
