@@ -15,9 +15,11 @@
     "Lost Historical Treasures",
     "Hidden Rooms in Famous Landmarks",
     "Medical Oddities of the Human Body",
-    "Weird Animal Survival Tactics"
+    "Weird Animal Survival Tactics",
+    "Microscopic Creatures and Insects"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -379,6 +381,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -534,10 +537,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    10251032,
-    15439746,
-    8321929,
-    27977358,
     5636768,
     15439746,
     34343459,
@@ -683,7 +682,11 @@
     8321899,
     7593613,
     10251032,
-    15439745
+    15439745,
+    8321929,
+    39408072,
+    10251032,
+    15439746
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -739,6 +742,7 @@
       "Altitude Time Dilation"
     ],
     "Microscopic Creatures and Insects": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
