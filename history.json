@@ -10,9 +10,11 @@
     "Medical Oddities of the Human Body",
     "Lost Ancient Roman Technologies",
     "Bizarre Psychological Illusion Hacks",
-    "Strange Historical Medical Treatments"
+    "Strange Historical Medical Treatments",
+    "The Dark Side of Space Exploration"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -434,6 +436,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -589,10 +592,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    7253196,
-    4841217,
-    8321899,
-    39107546,
     6345049,
     15440319,
     8322047,
@@ -738,7 +737,11 @@
     8321927,
     7593613,
     37410264,
-    15439756
+    15439756,
+    8322047,
+    39107095,
+    15386816,
+    15440318
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -774,6 +777,7 @@
       "Altitude Time Dilation"
     ],
     "The Dark Side of Space Exploration": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
