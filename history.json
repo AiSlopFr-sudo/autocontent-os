@@ -29,9 +29,11 @@
     "Unusual Animal Friendships and Behaviors",
     "Unexplained Natural Phenomena on Earth",
     "Bizarre Historical Weather Events",
-    "Forbidden Archaeology Discoveries"
+    "Forbidden Archaeology Discoveries",
+    "Bizarre Planet Facts in our Solar System"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -491,6 +493,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -646,10 +649,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    8558508,
-    15440318,
-    8321929,
-    38787756,
     7253196,
     15440318,
     8322043,
@@ -795,7 +794,11 @@
     34343459,
     39107544,
     6345049,
-    15439758
+    15439758,
+    8321899,
+    39107544,
+    8558508,
+    4841217
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -922,6 +925,7 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Planet Facts in our Solar System": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
