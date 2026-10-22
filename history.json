@@ -17,9 +17,11 @@
     "Cybersecurity and Digital Myths",
     "Strange Historical Medical Treatments",
     "Bizarre Planet Facts in our Solar System",
-    "Unsolved Deep Sea Mysteries"
+    "Unsolved Deep Sea Mysteries",
+    "Bizarre Historical Weather Events"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -525,6 +527,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -680,10 +683,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    6345049,
-    15439758,
-    8321927,
-    39107544,
     5636768,
     4841217,
     8322043,
@@ -829,7 +828,11 @@
     7034335,
     40375834,
     37410264,
-    15439758
+    15439758,
+    7034335,
+    40375833,
+    8558508,
+    4841217
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1044,6 +1047,7 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Historical Weather Events": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
