@@ -21,9 +21,11 @@
     "Bizarre Historical Weather Events",
     "Unexplained Anomalies in the Sahara Desert",
     "The Dark Side of Space Exploration",
-    "Bizarre Body Modifications Through History"
+    "Bizarre Body Modifications Through History",
+    "Bizarre Space Weather and Black Holes"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -537,6 +539,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -692,10 +695,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    6345049,
-    15439745,
-    34343459,
-    7593613,
     8558508,
     15439745,
     8322047,
@@ -841,7 +840,11 @@
     34343459,
     39107544,
     6345049,
-    4883865
+    4883865,
+    34343459,
+    7593613,
+    15386816,
+    15440318
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1113,6 +1116,7 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Space Weather and Black Holes": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
