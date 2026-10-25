@@ -24,9 +24,11 @@
     "Bizarre Body Modifications Through History",
     "Bizarre Space Weather and Black Holes",
     "Unusual Animal Friendships and Behaviors",
-    "Lost Historical Treasures"
+    "Lost Historical Treasures",
+    "Weird Plant Survival and Defense Mechanisms"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -546,6 +548,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -701,10 +704,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    8558508,
-    15439758,
-    8321929,
-    39407895,
     5636768,
     4883865,
     8322145,
@@ -850,7 +849,11 @@
     8321899,
     40375834,
     5636768,
-    15439756
+    15439756,
+    8322043,
+    40375834,
+    6345049,
+    4841217
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -972,6 +975,7 @@
       "Altitude Time Dilation"
     ],
     "Weird Plant Survival and Defense Mechanisms": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
