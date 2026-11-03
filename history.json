@@ -17,9 +17,11 @@
     "Unusual Animal Friendships and Behaviors",
     "Bizarre Psychological Illusion Hacks",
     "Medical Oddities of the Human Body",
-    "Hidden Rooms in Famous Landmarks"
+    "Hidden Rooms in Famous Landmarks",
+    "Bizarre Space Weather and Black Holes"
   ],
   "facts": [
+    "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
     "Altitude Time Dilation",
@@ -595,6 +597,7 @@
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
+    "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts",
     "Insane Altitude Time Dilation Fact! \ud83e\udd2f #Shorts"
   ],
   "scripts": [
@@ -751,10 +754,6 @@
   ],
   "used_pexels_ids": [
     7253196,
-    15439746,
-    34343459,
-    38787756,
-    7253196,
     4883865,
     7034335,
     40375834,
@@ -899,7 +898,11 @@
     8321927,
     40375834,
     5636768,
-    15440319
+    15440319,
+    8322043,
+    7593613,
+    15386816,
+    15439756
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1193,6 +1196,7 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Space Weather and Black Holes": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
