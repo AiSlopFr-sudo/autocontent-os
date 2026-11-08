@@ -30,7 +30,8 @@
     "Bizarre Planet Facts in our Solar System",
     "Strange Laws That Still Exist Today",
     "Strange Medical Anomalies and Conditions",
-    "Cybersecurity and Digital Myths"
+    "Cybersecurity and Digital Myths",
+    "Conspiracies That Turned Out To Be True"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -789,10 +790,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    5983912,
-    15439756,
-    8321927,
-    39407895,
     8558508,
     15439746,
     8321927,
@@ -938,7 +935,11 @@
     34343459,
     7593613,
     5983912,
-    15440318
+    15440318,
+    8322145,
+    39407895,
+    6345049,
+    4841217
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1233,6 +1234,7 @@
       "Altitude Time Dilation"
     ],
     "Conspiracies That Turned Out To Be True": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
