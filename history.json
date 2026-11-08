@@ -31,7 +31,8 @@
     "Strange Laws That Still Exist Today",
     "Strange Medical Anomalies and Conditions",
     "Cybersecurity and Digital Myths",
-    "Conspiracies That Turned Out To Be True"
+    "Conspiracies That Turned Out To Be True",
+    "The Dark Side of Space Exploration"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -790,10 +791,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    8558508,
-    15439746,
-    8321927,
-    39107544,
     6345049,
     4841217,
     8321927,
@@ -939,7 +936,11 @@
     8322145,
     39407895,
     6345049,
-    4841217
+    4841217,
+    8321927,
+    39107546,
+    8348130,
+    15439758
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -987,6 +988,7 @@
       "Altitude Time Dilation"
     ],
     "The Dark Side of Space Exploration": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
