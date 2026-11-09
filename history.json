@@ -32,7 +32,8 @@
     "Strange Medical Anomalies and Conditions",
     "Cybersecurity and Digital Myths",
     "Conspiracies That Turned Out To Be True",
-    "The Dark Side of Space Exploration"
+    "The Dark Side of Space Exploration",
+    "Psychological Experiments That Went Too Far"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -792,10 +793,6 @@
   ],
   "used_pexels_ids": [
     6345049,
-    4841217,
-    8321927,
-    39407895,
-    6345049,
     15440319,
     8322043,
     39107544,
@@ -940,7 +937,11 @@
     8321927,
     39107546,
     8348130,
-    15439758
+    15439758,
+    34343459,
+    40375833,
+    5636768,
+    15440319
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1217,6 +1218,7 @@
       "Altitude Time Dilation"
     ],
     "Psychological Experiments That Went Too Far": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
