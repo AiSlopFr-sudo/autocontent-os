@@ -1,40 +1,6 @@
 {
   "topics": [
-    "Weird Animal Survival Tactics",
-    "Unsolved Deep Sea Mysteries",
-    "Ancient Roman Engineering Secrets",
-    "Bizarre Deep Space Signals",
-    "Lost Ancient Roman Technologies",
-    "Weird Plant Survival and Defense Mechanisms",
-    "Deep Ocean Trenches and Monsters",
-    "Bizarre Body Modifications Through History",
-    "Forbidden Archaeology Discoveries",
-    "Unexplained Natural Phenomena on Earth",
-    "The Weirdest Patents Ever Granted",
-    "Bizarre Historical Weather Events",
-    "Unexplained Anomalies in the Sahara Desert",
-    "Quantum Physics Oddities",
-    "Unusual Animal Friendships and Behaviors",
-    "Bizarre Psychological Illusion Hacks",
-    "Medical Oddities of the Human Body",
-    "Hidden Rooms in Famous Landmarks",
-    "Bizarre Space Weather and Black Holes",
-    "Strange Historical Medical Treatments",
-    "Cryptids and Mythical Creatures Explained",
-    "Bizarre Deep Sea Fish Adaptations",
-    "Extreme Earth Survival Stories",
-    "Lost Historical Treasures",
-    "Weird Quantum Entanglement Experiments",
-    "Lost Civilizations and Technologies",
-    "Microscopic Creatures and Insects",
-    "Bizarre Planet Facts in our Solar System",
-    "Strange Laws That Still Exist Today",
-    "Strange Medical Anomalies and Conditions",
-    "Cybersecurity and Digital Myths",
-    "Conspiracies That Turned Out To Be True",
-    "The Dark Side of Space Exploration",
-    "Psychological Experiments That Went Too Far",
-    "Human Brain Psychology Hacks"
+    "Weird Quantum Entanglement Experiments"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -793,10 +759,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    6345049,
-    4841217,
-    8321929,
-    39107095,
     8558508,
     15439758,
     8322047,
@@ -942,7 +904,11 @@
     8321899,
     38787756,
     8558508,
-    15440318
+    15440318,
+    8321899,
+    39107095,
+    10251032,
+    15440319
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -957,6 +923,7 @@
       "Altitude Time Dilation"
     ],
     "Weird Quantum Entanglement Experiments": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
