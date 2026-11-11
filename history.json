@@ -4,7 +4,8 @@
     "Conspiracies That Turned Out To Be True",
     "Bizarre Planet Facts in our Solar System",
     "Ancient Roman Engineering Secrets",
-    "Bizarre Body Modifications Through History"
+    "Bizarre Body Modifications Through History",
+    "Bizarre Deep Space Signals"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -763,10 +764,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    15386816,
-    15439746,
-    8321927,
-    40375834,
     6345049,
     15439746,
     8322043,
@@ -912,7 +909,11 @@
     34343459,
     39107095,
     10251032,
-    15439746
+    15439746,
+    34343459,
+    39407895,
+    8558508,
+    15439745
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1016,6 +1017,7 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Deep Space Signals": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
