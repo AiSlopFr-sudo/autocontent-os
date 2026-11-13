@@ -8,7 +8,8 @@
     "Bizarre Deep Space Signals",
     "Unexplained Natural Phenomena on Earth",
     "Strange Laws That Still Exist Today",
-    "Quantum Physics Oddities"
+    "Quantum Physics Oddities",
+    "Cryptids and Mythical Creatures Explained"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -767,10 +768,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    8558508,
-    15439756,
-    8322043,
-    7593613,
     6345049,
     15439758,
     8321929,
@@ -916,7 +913,11 @@
     8321927,
     39407895,
     10251032,
-    15439746
+    15439746,
+    8322047,
+    39107095,
+    6345049,
+    15439745
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1135,6 +1136,7 @@
       "Altitude Time Dilation"
     ],
     "Cryptids and Mythical Creatures Explained": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
