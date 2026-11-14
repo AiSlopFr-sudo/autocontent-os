@@ -11,7 +11,8 @@
     "Quantum Physics Oddities",
     "Cryptids and Mythical Creatures Explained",
     "Deep Ocean Trenches and Monsters",
-    "Unexplained Anomalies in the Sahara Desert"
+    "Unexplained Anomalies in the Sahara Desert",
+    "Extreme Earth Survival Stories"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -772,10 +773,6 @@
   "used_pexels_ids": [
     6345049,
     15439746,
-    8321927,
-    7593613,
-    6345049,
-    15439746,
     8321899,
     7593613,
     15386816,
@@ -919,7 +916,11 @@
     8322043,
     39107095,
     8558508,
-    15439745
+    15439745,
+    8322145,
+    7593613,
+    37410264,
+    15440319
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1195,6 +1196,7 @@
       "Altitude Time Dilation"
     ],
     "Extreme Earth Survival Stories": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
