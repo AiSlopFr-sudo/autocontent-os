@@ -15,7 +15,8 @@
     "Extreme Earth Survival Stories",
     "Unusual Animal Friendships and Behaviors",
     "Hidden Rooms in Famous Landmarks",
-    "Unsolved Deep Sea Mysteries"
+    "Unsolved Deep Sea Mysteries",
+    "Strange Medical Anomalies and Conditions"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -774,10 +775,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    5983912,
-    4883865,
-    8322047,
-    39407895,
     10251032,
     15440318,
     8322145,
@@ -923,7 +920,11 @@
     8322145,
     39107546,
     6345049,
-    15439746
+    15439746,
+    8322043,
+    7593613,
+    6345049,
+    15440318
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1157,6 +1158,7 @@
       "Altitude Time Dilation"
     ],
     "Strange Medical Anomalies and Conditions": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
