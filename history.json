@@ -22,7 +22,8 @@
     "Psychological Experiments That Went Too Far",
     "Human Brain Psychology Hacks",
     "Medical Oddities of the Human Body",
-    "Cybersecurity and Digital Myths"
+    "Cybersecurity and Digital Myths",
+    "Bizarre Psychological Illusion Hacks"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -781,10 +782,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    8558508,
-    15439758,
-    7034335,
-    38787756,
     37410264,
     15439746,
     8321927,
@@ -930,7 +927,11 @@
     8321927,
     39408072,
     8558508,
-    15440318
+    15440318,
+    8322047,
+    38787756,
+    5636768,
+    15439758
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1144,6 +1145,7 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Psychological Illusion Hacks": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
