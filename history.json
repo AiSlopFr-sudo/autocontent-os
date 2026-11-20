@@ -30,7 +30,8 @@
     "The Dark Side of Space Exploration",
     "Forbidden Archaeology Discoveries",
     "Microscopic Creatures and Insects",
-    "Lost Historical Treasures"
+    "Lost Historical Treasures",
+    "Bizarre Historical Weather Events"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -789,10 +790,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    5983912,
-    4883865,
-    8322043,
-    40375833,
     8558508,
     15439758,
     34343459,
@@ -938,7 +935,11 @@
     34343459,
     7593613,
     40326835,
-    4883865
+    4883865,
+    34343459,
+    40375833,
+    10251032,
+    15439746
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1204,6 +1205,7 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Historical Weather Events": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
