@@ -33,7 +33,8 @@
     "Lost Historical Treasures",
     "Bizarre Historical Weather Events",
     "Strange Historical Medical Treatments",
-    "Lost Ancient Roman Technologies"
+    "Lost Ancient Roman Technologies",
+    "Bizarre Space Weather and Black Holes"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -792,10 +793,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    6345049,
-    4841217,
-    8321927,
-    39107546,
     8348130,
     15439758,
     34343459,
@@ -941,7 +938,11 @@
     34343459,
     39107095,
     6345049,
-    4883865
+    4883865,
+    8322145,
+    39107095,
+    5983912,
+    15439746
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1277,6 +1278,7 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Space Weather and Black Holes": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
