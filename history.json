@@ -5,7 +5,8 @@
     "Strange Medical Anomalies and Conditions",
     "Lost Civilizations and Technologies",
     "Extreme Earth Survival Stories",
-    "Lost Ancient Roman Technologies"
+    "Lost Ancient Roman Technologies",
+    "The Dark Side of Space Exploration"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -764,10 +765,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    37410264,
-    15439746,
-    34343459,
-    39107095,
     10251032,
     15439746,
     34343459,
@@ -913,7 +910,11 @@
     8321927,
     38787756,
     10251032,
-    15439746
+    15439746,
+    8321927,
+    7593613,
+    40326835,
+    15439758
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -966,6 +967,7 @@
       "Altitude Time Dilation"
     ],
     "The Dark Side of Space Exploration": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
