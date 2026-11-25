@@ -9,7 +9,8 @@
     "The Dark Side of Space Exploration",
     "The Weirdest Patents Ever Granted",
     "Unexplained Natural Phenomena on Earth",
-    "Microscopic Creatures and Insects"
+    "Microscopic Creatures and Insects",
+    "Strange Historical Medical Treatments"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -768,10 +769,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    8558508,
-    15440318,
-    8321927,
-    39407895,
     10251032,
     15439746,
     8322047,
@@ -917,7 +914,11 @@
     8322145,
     39107544,
     5636768,
-    4883865
+    4883865,
+    29280252,
+    39107095,
+    5636768,
+    4841217
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1181,6 +1182,7 @@
       "Altitude Time Dilation"
     ],
     "Strange Historical Medical Treatments": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
