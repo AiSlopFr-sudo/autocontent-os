@@ -13,7 +13,8 @@
     "Strange Historical Medical Treatments",
     "Unexplained Anomalies in the Sahara Desert",
     "Ancient Roman Engineering Secrets",
-    "Hidden Rooms in Famous Landmarks"
+    "Hidden Rooms in Famous Landmarks",
+    "Weird Plant Survival and Defense Mechanisms"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -772,10 +773,6 @@
     "Did you know time actually passes faster the higher you are from sea level? Your head ages fractionally faster than your feet! Subscribe for more insane facts!"
   ],
   "used_pexels_ids": [
-    8558508,
-    15439745,
-    8322145,
-    7593613,
     37410264,
     15440319,
     8321899,
@@ -921,7 +918,11 @@
     34343459,
     39107095,
     5636768,
-    15439758
+    15439758,
+    8321927,
+    40375834,
+    6345049,
+    15440318
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1075,6 +1076,7 @@
       "Altitude Time Dilation"
     ],
     "Weird Plant Survival and Defense Mechanisms": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
