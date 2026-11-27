@@ -16,7 +16,8 @@
     "Hidden Rooms in Famous Landmarks",
     "Weird Plant Survival and Defense Mechanisms",
     "Strange Laws That Still Exist Today",
-    "Bizarre Deep Sea Fish Adaptations"
+    "Bizarre Deep Sea Fish Adaptations",
+    "Bizarre Space Weather and Black Holes"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -777,10 +778,6 @@
   "used_pexels_ids": [
     6345049,
     15439746,
-    8322145,
-    39107546,
-    6345049,
-    15439746,
     8322043,
     7593613,
     6345049,
@@ -924,6 +921,10 @@
     8322047,
     39107544,
     5636768,
+    4841217,
+    8321899,
+    39107544,
+    6345049,
     4841217
   ],
   "topic_facts": {
@@ -1275,6 +1276,7 @@
       "Altitude Time Dilation"
     ],
     "Bizarre Space Weather and Black Holes": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
