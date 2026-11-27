@@ -17,7 +17,8 @@
     "Weird Plant Survival and Defense Mechanisms",
     "Strange Laws That Still Exist Today",
     "Bizarre Deep Sea Fish Adaptations",
-    "Bizarre Space Weather and Black Holes"
+    "Bizarre Space Weather and Black Holes",
+    "Deep Ocean Trenches and Monsters"
   ],
   "facts": [
     "Altitude Time Dilation",
@@ -777,10 +778,6 @@
   ],
   "used_pexels_ids": [
     6345049,
-    15439746,
-    8322043,
-    7593613,
-    6345049,
     15440318,
     34343459,
     38787756,
@@ -925,7 +922,11 @@
     8321899,
     39107544,
     6345049,
-    4841217
+    4841217,
+    34343459,
+    40375833,
+    7253196,
+    4883865
   ],
   "topic_facts": {
     "Unusual Animal Friendships and Behaviors": [
@@ -1345,6 +1346,7 @@
       "Altitude Time Dilation"
     ],
     "Deep Ocean Trenches and Monsters": [
+      "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
       "Altitude Time Dilation",
